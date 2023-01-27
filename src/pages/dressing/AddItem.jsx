@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/auth.context";
 import dressingApi from "../../services/DressingApi.service";
 
 function AddItem() {
     
     const navigate = useNavigate();
 
-    const [ itemInfos, setItemInfos ] = useState({ type: '', brand: '', imageUrl: '' })
+    const { isUserLoading, user } = useContext(AuthContext);
+
+    const [ itemInfos, setItemInfos ] = useState({ type: '', brand: '', imageUrl: '', ownerId: null })
     const [ occasions, setOccasions ] = useState([])
     const [ errorMessage, setErrorMessage ] = useState('');
 
@@ -43,9 +46,13 @@ function AddItem() {
         
         const fileUrl = response.fileUrl;
         setItemInfos({ ...itemInfos, imageUrl: fileUrl });
-
-
     }
+
+    useEffect(() => {
+        if ( !isUserLoading ) {
+            setItemInfos({ ...itemInfos, ownerId: user.id});
+        }
+    }, [isUserLoading, user])
 
     return <div id="add-item form-page">
         <h1>Add new clothing item</h1>
