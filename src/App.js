@@ -13,6 +13,7 @@ import { useContext } from 'react';
 import { AuthContext } from './context/auth.context';
 import GenerateOutfit from './pages/outfits/GenerateOutfit';
 import RandomOutfits from './pages/outfits/RandomOutfits';
+import ViewOutfit from './pages/outfits/ViewOutfit';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/dressing/item/edit/:itemId" element={<EditItem />} />
         <Route path="/outfits/random" element={<GenerateOutfit />} />
         <Route path="/outfits/random/view" element={<RandomOutfits />} />
+        <Route path="/outfits/single/view" element={<ViewOutfit />} />
       </Routes>
     </div>
   );

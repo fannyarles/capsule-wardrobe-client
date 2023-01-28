@@ -46,8 +46,10 @@ function RandomOutfit() {
     const handleSubmit = e => {
         e.preventDefault();
 
+        if (itemParams.occasion === '') { setErrorMessage(`Occasion is required`); return; }
+
         axios.post(`http://localhost:5005/outfits/random/`, itemParams)
-            .then(response => navigate('/outfits/random/view', { state: { outfits: response.data } }))
+            .then(response => navigate('/outfits/random/view', { state: { outfits: response.data, itemParams: itemParams } }))
             .catch(err => setErrorMessage(err.response.data.message))
     }
 
@@ -56,7 +58,15 @@ function RandomOutfit() {
 
         <p>Select parameters</p>
 
+        {errorMessage && <p>{errorMessage}</p>}
+
         <form onSubmit={handleSubmit} id="random-generator-form">
+
+            <label htmlFor="occasions">Occasion <span className="required">(Required)</span></label><br />
+            {/* <p data-outfit-occasion="" className="occasion selected" onClick={selectOccasion}>Any</p> */}
+            {occasions.map(el => <p data-outfit-occasion={el.value} key={el.value} onClick={selectOccasion} className="occasion">{el.name}</p>)}
+            <br /><br />
+
             <label htmlFor="category">Category</label><br />
             <p data-outfit-category="" className="category selected" onClick={selectType}>Any</p>
             <p data-outfit-category="twoPiece" className="category" onClick={selectType}>Top / Bottoms</p>
@@ -75,11 +85,6 @@ function RandomOutfit() {
                     <p data-outfit-item="Pantsuit" className="pieceItem" onClick={selectPieceItem}>Pantsuit</p>
                 </>
             }
-            <br /><br />
-            <label htmlFor="occasions">Occasion</label><br />
-            <p data-outfit-occasion="" className="occasion selected" onClick={selectOccasion}>Any</p>
-            {occasions.map(el => <p data-outfit-occasion={el.value} key={el.value} onClick={selectOccasion} className="occasion">{el.name}</p>)}
-
             <br /><br />
 
             <input type="submit" value="Generate outfit" />
