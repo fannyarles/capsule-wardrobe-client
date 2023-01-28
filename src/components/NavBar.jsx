@@ -19,8 +19,8 @@ function NavBar() {
                 :
                 <>
                     <Link to="/dressing" className="mx-5">My Dressing</Link>
-                    <Link to="/dressing/add-item" className="mx-5">Add Clothing Items</Link>
-                    <Link to="/random-outfit" className="mx-5">Random Outfit</Link>
+                    <Link to="/dressing/item/add" className="mx-5">Add Clothing Items</Link>
+                    <Link to="/outfits/random" className="mx-5">Random Outfit</Link>
                     <Link to="/" className="mx-5" onClick={() => logoutUser()}>Logout</Link>
                 </>
             }

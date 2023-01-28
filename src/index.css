@@ -6,9 +6,9 @@ body {
   padding: 40px;
 }
 
-h1 {
+/* h1 {
   font-size: 1.5rem;
-}
+} */
 
 #form-page {
   text-align: left;
@@ -32,7 +32,7 @@ input, select {
   padding: 10px 15px;
 }
 
-.btn {
+/* .btn {
   border: 1px solid black;
   padding: 10px 20px;
   margin-top: 30px;
@@ -40,4 +40,21 @@ input, select {
 
 .btn-primary {
 
+} */
+
+.occasions-list-item + .occasions-list-item::before {
+  content: ' | ';
+}
+
+.selected {
+  background-color: #333;
+  color: white;
+}
+
+#random-generator-form p {
+  cursor: pointer;
+  display: inline-block;
+  border-radius: 50px;
+  margin: 10px;
+  padding: 6px 22px 8px 22px;
 }

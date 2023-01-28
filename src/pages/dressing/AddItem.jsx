@@ -4,14 +4,14 @@ import { AuthContext } from "../../context/auth.context";
 import dressingApi from "../../services/DressingApi.service";
 
 function AddItem() {
-    
+
     const navigate = useNavigate();
 
     const { isUserLoading, user } = useContext(AuthContext);
 
-    const [ itemInfos, setItemInfos ] = useState({ type: '', brand: '', imageUrl: '', ownerId: null })
-    const [ occasions, setOccasions ] = useState([])
-    const [ errorMessage, setErrorMessage ] = useState('');
+    const [itemInfos, setItemInfos] = useState({ category: '', brand: '', imageUrl: '', ownerId: null })
+    const [occasions, setOccasions] = useState([])
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleInputChange = e => {
         const name = e.target.name;
@@ -23,45 +23,46 @@ function AddItem() {
         const name = e.target.name;
         const checked = e.target.checked;
 
-        if ( checked ) { setOccasions( [...occasions, name ] )
-        } else { setOccasions( [...occasions].filter(el => el === name) )}
+        if (checked) {
+            setOccasions([...occasions, name])
+        } else { setOccasions([...occasions].filter(el => el === name)) }
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if ( itemInfos.type === '' || itemInfos.imageUrl === '' || !occasions.length ) { setErrorMessage(`Please, fill all required fields.`); return; }
+        if (itemInfos.category === '' || itemInfos.imageUrl === '' || !occasions.length) { setErrorMessage(`Please, fill all required fields.`); return; }
 
-        dressingApi.addItem({ ...itemInfos, occasions: occasions})
-        .then(response => navigate('/dressing'))
-        .catch(err => setErrorMessage(err.response.data.message))
+        dressingApi.addItem({ ...itemInfos, occasions: occasions })
+            .then(response => navigate('/dressing'))
+            .catch(err => setErrorMessage(err.response.data.message))
     }
 
     const handleUpload = async (e) => {
         const uploadData = new FormData();
         uploadData.append("imageUrl", e.target.files[0]);
-     
-        const response = await dressingApi.uploadPhoto( uploadData )
-                        .catch(err => setErrorMessage("Error while uploading the file: ", err));
-        
+
+        const response = await dressingApi.uploadPhoto(uploadData)
+            .catch(err => setErrorMessage("Error while uploading the file: ", err));
+
         const fileUrl = response.fileUrl;
         setItemInfos({ ...itemInfos, imageUrl: fileUrl });
     }
 
     useEffect(() => {
-        if ( !isUserLoading ) {
-            setItemInfos({ ...itemInfos, ownerId: user.id});
+        if (!isUserLoading) {
+            setItemInfos({ ...itemInfos, ownerId: user.id });
         }
     }, [isUserLoading, user])
 
     return <div id="add-item form-page">
         <h1>Add new clothing item</h1>
 
-        { errorMessage && <p>{ errorMessage }</p> }
+        {errorMessage && <p>{errorMessage}</p>}
 
-        <form onSubmit={ handleSubmit }>
-            <label htmlFor="type">Type of clothing <span className="required">(Required)</span></label><br/>
-            <select name="type" value={ itemInfos.type } onChange={ handleInputChange }>
+        <form onSubmit={handleSubmit}>
+            <label htmlFor="category">Category of clothing <span className="required">(Required)</span></label><br />
+            <select name="category" value={itemInfos.category} onChange={handleInputChange}>
                 <optgroup label="Tops">
                     <option>T-shirt</option>
                     <option>Tank top</option>
@@ -101,10 +102,10 @@ function AddItem() {
                     <option>Belt</option>
                     <option>Hat</option>
                 </optgroup>
-            </select><br/><br/>
-            
-            <label htmlFor="brand">Brand</label><br/>
-            <input list="brands" id="brand" name="brand" value={ itemInfos.brand } onChange={ handleInputChange } />
+            </select><br /><br />
+
+            <label htmlFor="brand">Brand</label><br />
+            <input list="brands" id="brand" name="brand" value={itemInfos.brand} onChange={handleInputChange} autoComplete="off" />
 
             <datalist id="brands">
                 <option value="A.P.C." />
@@ -112,21 +113,21 @@ function AddItem() {
                 <option value="ACME" />
                 <option value="Acne Studio" />
                 <option value="adidas" />
-            </datalist><br/><br/>
-            
-            <label htmlFor="occasion">Occasions <span className="required">(Required)</span></label><br/>
-            <input type="checkbox" id="casual" name="casual" value={ itemInfos.casual } onChange={ handleCheckboxChange } />
-            <label htmlFor="casual">Casual</label><br/>
-            <input type="checkbox" id="formal" name="formal" value={ itemInfos.formal } onChange={ handleCheckboxChange } />
-            <label htmlFor="formal">Formal</label><br/>
-            <input type="checkbox" id="business" name="business" value={ itemInfos.business } onChange={ handleCheckboxChange } />
-            <label htmlFor="business">Business</label><br/>
-            <input type="checkbox" id="sportswear" name="sportswear" value={ itemInfos.sportswear } onChange={ handleCheckboxChange } />
-            <label htmlFor="sportswear">Sportswear</label><br/><br/>
-            
-            <label htmlFor="picture">Picture <span className="required">(Required)</span></label><br/>
-            <input name="picture" type="file" onChange={ handleUpload } />
-            <br/><br/>
+            </datalist><br /><br />
+
+            <label htmlFor="occasion">Occasions <span className="required">(Required)</span></label><br />
+            <input type="checkbox" id="casual" name="casual" value={itemInfos.casual} onChange={handleCheckboxChange} />
+            <label htmlFor="casual">Casual</label><br />
+            <input type="checkbox" id="formal" name="formal" value={itemInfos.formal} onChange={handleCheckboxChange} />
+            <label htmlFor="formal">Formal</label><br />
+            <input type="checkbox" id="business" name="business" value={itemInfos.business} onChange={handleCheckboxChange} />
+            <label htmlFor="business">Business</label><br />
+            <input type="checkbox" id="sportswear" name="sportswear" value={itemInfos.sportswear} onChange={handleCheckboxChange} />
+            <label htmlFor="sportswear">Sportswear</label><br /><br />
+
+            <label htmlFor="picture">Picture <span className="required">(Required)</span></label><br />
+            <input name="picture" type="file" onChange={handleUpload} />
+            <br /><br />
 
             <input type="submit" value="Add item" className='btn btn-primary' />
         </form>
