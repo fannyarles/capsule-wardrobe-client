@@ -1,19 +1,25 @@
 import { Routes, Route } from 'react-router-dom';
+import { useContext } from 'react';
+import { Toaster } from 'react-hot-toast';
 import './App.css';
+
+import { AuthContext } from './context/auth.context';
+
 import NavBar from './components/NavBar';
 import HomePage from './pages/HomePage';
 import Dashboard from './pages/Dashboard'
+
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+
 import Dressing from './pages/dressing/Dressing';
 import AddItem from './pages/dressing/AddItem';
 import EditItem from './pages/dressing/EditItem';
 
-import { useContext } from 'react';
-import { AuthContext } from './context/auth.context';
 import GenerateOutfit from './pages/outfits/GenerateOutfit';
 import RandomOutfits from './pages/outfits/RandomOutfits';
 import ViewOutfit from './pages/outfits/ViewOutfit';
+import SavedOutfits from './pages/outfits/SavedOutfits';
 
 function App() {
 
@@ -21,6 +27,7 @@ function App() {
 
   return (
     <div className="App">
+      <Toaster />
       <NavBar />
       <Routes>
         <Route path="/signup" element={<Signup />} />
@@ -36,6 +43,7 @@ function App() {
         <Route path="/outfits/random" element={<GenerateOutfit />} />
         <Route path="/outfits/random/view" element={<RandomOutfits />} />
         <Route path="/outfits/single/view" element={<ViewOutfit />} />
+        <Route path="/outfits/saved/" element={<SavedOutfits />} />
       </Routes>
     </div>
   );
