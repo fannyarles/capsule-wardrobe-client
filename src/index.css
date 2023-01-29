@@ -3,7 +3,7 @@ html {
 }
 
 body {
-  padding: 40px;
+  /* padding: 40px; */
 }
 
 /* h1 {
@@ -60,16 +60,17 @@ input, select {
 }
 
 #outfit-preview {
+  margin: auto;
   position: relative;
   max-width: 900px;
   height: 80vh;
-  overflow: hidden;
+  /* overflow: hidden; */
   /* background-color: red; */
 }
 
 #outfit-preview img {
   position: absolute;
-  border-radius: 40px;
+  /* border-radius: 40px; */
   max-width: 100%;
   cursor: crosshair;
   /* mix-blend-mode: lighten; */
@@ -78,7 +79,10 @@ input, select {
 
 #outfit-preview img:hover {
   mix-blend-mode: normal;
-  z-index: 5!important;
+  /* z-index: 5!important; */
+  /* box-shadow: rgba(0, 0, 0, .2) 0 0 10px; */
+  /* border: 1px solid #666; */
+  scale: 1.1;
 }
 
 #outfit-preview img.tops {

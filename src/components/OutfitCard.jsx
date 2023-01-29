@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 
 function OutfitCard(props) {
 
-    const { outfit } = props;
-    console.log(outfit)
+    const { from, outfit } = props;
 
     return (
         <div className="card mx-3 my-3 outfit-card" style={{ width: "25%" }}>
@@ -21,9 +20,13 @@ function OutfitCard(props) {
                         <img src={outfit.footwear.imageUrl} alt="item" width="150px" />
                     </>
                 }
-                <Link to='/outfits/single/view' state={{ outfit: outfit }} className="btn btn-primary">View / Edit Outfit</Link>
+                {from === "savedOutfits" ?
+                    <Link to='/outfits/single/view' state={{ outfit: outfit }} className="btn btn-primary"> Edit Outfit</Link>
+                    :
+                    <Link to='/outfits/single/view' state={{ outfit: outfit }} className="btn btn-primary">Save Outfit</Link>
+                }
             </div>
-        </div>
+        </div >
     );
 }
 

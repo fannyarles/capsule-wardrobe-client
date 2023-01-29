@@ -2,14 +2,16 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import dressingApi from '../../services/DressingApi.service';
+import brandsData from './../../data/brands.data';
+import { categoriesData, occasionsData } from './../../data/itemsParams.data'
 
 function ViewItem() {
 
     const navigate = useNavigate();
 
     const { itemId } = useParams();
-    // const [occasions, setOccasions] = useState([])
-    const [itemInfos, setItemInfos] = useState({ itemId: '', category: '', brand: '', imageUrl: '', occasions: [], ownerId: null })
+    const [itemInfos, setItemInfos] = useState({ itemId: '', category: '', brand: '', imageUrl: '', occasions: [], ownerId: null });
+    const [isUploading, setIsUploading] = useState(false)
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleInputChange = e => {
@@ -18,16 +20,15 @@ function ViewItem() {
         setItemInfos({ ...itemInfos, [name]: value });
     }
 
-    const handleCheckboxChange = e => {
-        const name = e.target.name;
-        const checked = e.target.checked
-
-        if (checked) {
-            setItemInfos({ ...itemInfos, occasions: [...itemInfos.occasions, name] })
+    const selectOccasion = e => {
+        const value = e.target.getAttribute('data-outfit-occasion');
+        if (e.target.classList.contains("selected")) {
+            e.target.classList.remove("selected")
+            const filteredOccasions = [...itemInfos.occasions].filter(occ => occ !== value);
+            setItemInfos({ ...itemInfos, occasions: filteredOccasions })
         } else {
-            const updatedOccasions = [...itemInfos.occasions].filter(el => el !== name);
-            console.log(updatedOccasions);
-            setItemInfos({ ...itemInfos, occasions: [...updatedOccasions] })
+            e.target.classList.add("selected")
+            setItemInfos({ ...itemInfos, occasions: [...itemInfos.occasions, value] })
         }
     }
 
@@ -51,6 +52,8 @@ function ViewItem() {
     }
 
     const handleUpload = async (e) => {
+        setIsUploading(true);
+
         const uploadData = new FormData();
         uploadData.append("imageUrl", e.target.files[0]);
 
@@ -58,7 +61,9 @@ function ViewItem() {
             .catch(err => setErrorMessage("Error while uploading the file: ", err));
 
         const fileUrl = response.fileUrl;
+
         setItemInfos({ ...itemInfos, imageUrl: fileUrl });
+        setIsUploading(false);
     }
 
     useEffect(() => {
@@ -79,67 +84,22 @@ function ViewItem() {
             <form onSubmit={handleSubmit}>
                 <label htmlFor="category">Category of clothing <span className="required">(Required)</span></label><br />
                 <select name="category" value={itemInfos.category} onChange={handleInputChange}>
-                    <optgroup label="Tops">
-                        <option>T-shirt</option>
-                        <option>Tank top</option>
-                        <option>Shirt</option>
-                        <option>Blouse</option>
-                        <option>Sweater</option>
-                        <option>Jacket | Vest</option>
-                        <option>Coat</option>
-                        <option>Sweater</option>
-                    </optgroup>
-                    <optgroup label="Bottoms">
-                        <option>Jeans</option>
-                        <option>Pants</option>
-                        <option>Skirt</option>
-                        <option>Shorts</option>
-                        <option>Tracksuit</option>
-                    </optgroup>
-                    <optgroup label="Other">
-                        <option>Pantsuit</option>
-                        <option>Dress</option>
-                    </optgroup>
-                    <optgroup label="Footwear">
-                        <option>Sandals</option>
-                        <option>Heels</option>
-                        <option>Sneakers</option>
-                        <option>Boots</option>
-                    </optgroup>
-                    <optgroup label="Accessories">
-                        <option>Scarf</option>
-                        <option>Glasses | Sunglasses</option>
-                        <option>Bag | Purse</option>
-                        <option>Earrings</option>
-                        <option>Bracelet</option>
-                        <option>Necklace</option>
-                        <option>Ring</option>
-                        <option>Watch</option>
-                        <option>Belt</option>
-                        <option>Hat</option>
-                    </optgroup>
+                    {categoriesData.map(cat => <>
+                        <optgroup key={cat.name} label={cat.name}>
+                            {cat.items.map(item => <option key={item}>{item}</option>)}
+                        </optgroup>
+                    </>)}
                 </select><br /><br />
+
 
                 <label htmlFor="brand">Brand</label><br />
                 <input list="brands" id="brand" name="brand" value={itemInfos.brand} onChange={handleInputChange} autoComplete="off" />
-
                 <datalist id="brands">
-                    <option value="A.P.C." />
-                    <option value="A|X Armani Exchange" />
-                    <option value="ACME" />
-                    <option value="Acne Studio" />
-                    <option value="adidas" />
+                    {brandsData.map(brand => <option value={brand} />)}
                 </datalist><br /><br />
 
                 <label htmlFor="occasion">Occasions <span className="required">(Required)</span></label><br />
-                <input type="checkbox" id="casual" name="casual" onChange={handleCheckboxChange} checked={isChecked('casual')} />
-                <label htmlFor="casual">Casual</label><br />
-                <input type="checkbox" id="formal" name="formal" value={itemInfos.formal} onChange={handleCheckboxChange} checked={isChecked('formal')} />
-                <label htmlFor="formal">Formal</label><br />
-                <input type="checkbox" id="business" name="business" value={itemInfos.business} onChange={handleCheckboxChange} checked={isChecked('business')} />
-                <label htmlFor="business">Business</label><br />
-                <input type="checkbox" id="sportswear" name="sportswear" value={itemInfos.sportswear} onChange={handleCheckboxChange} checked={isChecked('sportswear')} />
-                <label htmlFor="sportswear">Sportswear</label><br /><br />
+                {occasionsData.map(el => <p data-outfit-occasion={el.value} key={el.value} onClick={selectOccasion} className={itemInfos.occasions.includes(el.value) ? "occasion selected" : "occasion"} >{el.name}</p>)}<br /><br />
 
                 <img src={itemInfos.imageUrl} alt='item-pic' /><br />
                 <label htmlFor="picture">Picture <span className="required">(Required)</span></label><br />
@@ -147,7 +107,10 @@ function ViewItem() {
                 <input type="text" value={itemInfos.imageUrl} readOnly={true} />
                 <br /><br />
 
-                <input type="submit" value="Update item" className='btn btn-primary' />
+                <button className="btn btn-primary" type="button" disabled={isUploading}>
+                    {isUploading ? <><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...</>
+                        : <>Edit Item</>}
+                </button>
             </form>
 
             <button className="btn btn-primary" onClick={() => deleteItem()}>Delete item</button>

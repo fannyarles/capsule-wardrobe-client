@@ -10,8 +10,6 @@ function SavedOutfits() {
     const [outfits, setOutfits] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
 
-    console.log(outfits)
-
     useEffect(() => {
         axios.get(`http://localhost:5005/outfits/saved`, { headers: { "Authorization": `Bearer ${storedToken}` } })
             .then(response => setOutfits(response.data))
@@ -24,7 +22,10 @@ function SavedOutfits() {
             <Loader />
             :
             <>
-                {outfits.map(outfit => <OutfitCard outfit={outfit} />)}
+                <h1>Saved Outfits ({outfits.length})</h1>
+                <div className="d-inline-flex">
+                    {outfits.map(outfit => <OutfitCard key={outfit._id} from="savedOutfits" outfit={outfit} />)}
+                </div>
             </>
         }
 

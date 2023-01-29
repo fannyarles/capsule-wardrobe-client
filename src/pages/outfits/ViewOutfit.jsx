@@ -38,7 +38,7 @@ function ViewOutfit() {
                 },
                 success: {
                     duration: 3000,
-                    icon: '🔥',
+                    icon: '✔',
                 },
             }
         );

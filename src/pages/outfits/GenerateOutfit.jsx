@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { occasions } from '../../data/itemsParams.data';
+import { occasionsData } from '../../data/itemsParams.data';
 
 function RandomOutfit() {
 
@@ -63,8 +63,7 @@ function RandomOutfit() {
         <form onSubmit={handleSubmit} id="random-generator-form">
 
             <label htmlFor="occasions">Occasion <span className="required">(Required)</span></label><br />
-            {/* <p data-outfit-occasion="" className="occasion selected" onClick={selectOccasion}>Any</p> */}
-            {occasions.map(el => <p data-outfit-occasion={el.value} key={el.value} onClick={selectOccasion} className="occasion">{el.name}</p>)}
+            {occasionsData.map(el => <p data-outfit-occasion={el.value} key={el.value} onClick={selectOccasion} className="occasion">{el.name}</p>)}
             <br /><br />
 
             <label htmlFor="category">Category</label><br />

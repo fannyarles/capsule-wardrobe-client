@@ -1,7 +1,7 @@
-const categories = [
+const categoriesData = [
     {
         "name": "Tops",
-        "items": ["T-shirt", "Tank top", "Shirt", "Blouse", "Sweater", "Jacket | Vest", "Coat", "Sweater"]
+        "items": ["T-shirt", "Tank top", "Shirt", "Blouse", "Sweater", "Jacket | Vest", "Coat"]
     },
     {
         "name": "Bottoms",
@@ -21,7 +21,7 @@ const categories = [
     }
 ];
 
-const occasions = [
+const occasionsData = [
     {
         "name": "Casual",
         "value": "casual"
@@ -40,4 +40,4 @@ const occasions = [
     },
 ];
 
-module.exports = { categories, occasions };
+module.exports = { categoriesData, occasionsData };
