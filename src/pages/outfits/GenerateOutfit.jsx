@@ -8,7 +8,6 @@ function RandomOutfit() {
     const navigate = useNavigate();
 
     const [itemParams, setItemParams] = useState({ category: '', pieceItem: '', occasion: '' });
-    const [outfits, setOutfits] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
 
     const selectOccasion = e => {
@@ -49,8 +48,9 @@ function RandomOutfit() {
         if (itemParams.occasion === '') { setErrorMessage(`Occasion is required`); return; }
 
         axios.post(`http://localhost:5005/outfits/random/`, itemParams)
-            .then(response => navigate('/outfits/random/view', { state: { outfits: response.data, itemParams: itemParams } }))
+            .then(response => navigate('/outfits/random/view', { state: { results: response.data } }))
             .catch(err => setErrorMessage(err.response.data.message))
+
     }
 
     return (<>

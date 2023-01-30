@@ -59,56 +59,85 @@ input, select {
   padding: 6px 22px 8px 22px;
 }
 
-#outfit-preview {
+
+/* VIEW OUTFIT PAGE */
+
+#view-outfit-page {
   margin: auto;
   position: relative;
-  max-width: 900px;
-  height: 80vh;
+  height: 70vh;
   /* overflow: hidden; */
   /* background-color: red; */
 }
 
-#outfit-preview img {
-  position: absolute;
-  /* border-radius: 40px; */
-  max-width: 100%;
+#view-outfit-page .item {
+  position: relative;
   cursor: crosshair;
-  /* mix-blend-mode: lighten; */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
   mix-blend-mode: multiply;
 }
-
-#outfit-preview img:hover {
-  mix-blend-mode: normal;
-  /* z-index: 5!important; */
-  /* box-shadow: rgba(0, 0, 0, .2) 0 0 10px; */
-  /* border: 1px solid #666; */
-  scale: 1.1;
-}
-
-#outfit-preview img.tops {
-  z-index: 3;
-  left: 5%;
-  width: 40%;
-}
-
-#outfit-preview img.bottoms {
-  width: 60%;
-  z-index: 1;
-  top: 20%;
-  right: 5%;
-}
-
-#outfit-preview img.footwear {
-  z-index: 2;
-  left: 15%;
-  width: 30%;
+#view-outfit-page .item img {
+  width: 100%;
   height: auto;
-  bottom: 5%;
 }
 
-#outfit-preview img.one-pieces {
-  left: 10%;
-  top: 10%;
-  width: 80%;
-  z-index: 1;
+#view-outfit-page > div:hover {
+  /* mix-blend-mode: normal; */
+}
+
+#view-outfit-page .tops {
+  /* z-index: 3; */
+  /* left: 0; */
+  /* width: 40%; */
+  /* height: 400px;
+  width: 500px; */
+}
+
+#view-outfit-page .bottoms {
+  /* width: 60%; */
+  /* z-index: 1; */
+  /* top: 20%;
+  left: 60%; */
+  /* height: 650px;
+  width: 400px; */
+}
+
+#view-outfit-page .footwear {
+  /* z-index: 2; */
+  /* left: 15%;
+  bottom: 0; */
+  /* height: 300px;
+  width: 300px; */
+}
+
+#view-outfit-page .one-pieces {
+    /* left: 10%;
+    top: 10%; */
+  /* width: 80%;
+  z-index: 1; */
+}
+
+#view-outfit-page .item-infos {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, .9);
+}
+
+#view-outfit-page .item:hover .item-infos {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+#view-outfit-page .item-infos button {
+  width: fit-content;
+  margin: 0 auto;
 }

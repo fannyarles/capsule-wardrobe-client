@@ -4,6 +4,7 @@ import { AuthContext } from "./../../context/auth.context";
 import dressingApi from "./../../services/DressingApi.service";
 import brandsData from './../../data/brands.data';
 import { categoriesData, occasionsData } from './../../data/itemsParams.data'
+import { toast } from "react-hot-toast";
 
 function AddItem() {
 
@@ -38,9 +39,27 @@ function AddItem() {
 
         if (itemInfos.category === '' || itemInfos.imageUrl === '' || !itemInfos.occasions.length) { setErrorMessage(`Please, fill all required fields.`); return; }
 
-        dressingApi.addItem(itemInfos)
+        const addedItem = dressingApi.addItem(itemInfos)
             .then(response => navigate('/dressing'))
             .catch(err => setErrorMessage(err.response.data.message))
+
+        toast.promise(
+            addedItem,
+            {
+                loading: 'Loading',
+                success: () => `Item successfully added!`,
+                error: () => `Error: ${errorMessage}`,
+            },
+            {
+                style: {
+                    minWidth: '250px',
+                },
+                success: {
+                    duration: 3000,
+                    icon: '✔',
+                },
+            }
+        );
     }
 
     const handleUpload = async (e) => {
@@ -92,7 +111,7 @@ function AddItem() {
             <input name="picture" type="file" onChange={handleUpload} />
             <br /><br />
 
-            <button className="btn btn-primary" type="button" disabled={isUploading}>
+            <button className="btn btn-primary" type="button" disabled={isUploading} onClick={handleSubmit}>
                 {isUploading ? <><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...</>
                     : <>Add Item</>}
             </button>

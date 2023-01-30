@@ -8,7 +8,7 @@ function NavBar() {
     // console.log(isLoggedIn)
 
     return (
-        <nav className="navbar navbar-light pt-4 pb-5">
+        <nav className="navbar navbar-light pt-4 pb-5 mb-5">
             <Link to="/" className="mx-5">Home</Link>
 
             {!isLoggedIn ?

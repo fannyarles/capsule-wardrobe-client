@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function OutfitCard(props) {
 
-    const { from, outfit } = props;
+    const { from, occasion, outfit } = props;
 
     return (
         <div className="card mx-3 my-3 outfit-card" style={{ width: "25%" }}>
@@ -21,12 +21,12 @@ function OutfitCard(props) {
                     </>
                 }
                 {from === "savedOutfits" ?
-                    <Link to='/outfits/single/view' state={{ outfit: outfit }} className="btn btn-primary"> Edit Outfit</Link>
+                    <Link to={`/outfits/view/${outfit._id}`} className="btn btn-primary"> Edit Outfit</Link>
                     :
-                    <Link to='/outfits/single/view' state={{ outfit: outfit }} className="btn btn-primary">Save Outfit</Link>
+                    <Link to='/outfits/random/view/single' state={{ occasion: occasion, outfit: outfit }} className="btn btn-primary">Save Outfit</Link>
                 }
             </div>
-        </div >
+        </div>
     );
 }
 

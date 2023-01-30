@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import dressingApi from '../../services/DressingApi.service';
 import brandsData from './../../data/brands.data';
 import { categoriesData, occasionsData } from './../../data/itemsParams.data'
+import { toast } from "react-hot-toast";
 
 function ViewItem() {
 
@@ -37,18 +38,52 @@ function ViewItem() {
 
         if (itemInfos.category === '' || itemInfos.imageUrl === '' || !itemInfos.occasions.length) { setErrorMessage(`Please, fill all required fields.`); return; }
 
-        axios.put(`http://localhost:5005/dressing/item/${itemId}`, { ...itemInfos, occasions: itemInfos.occasions })
+        const editedItem = axios.put(`http://localhost:5005/dressing/item/${itemId}`, { ...itemInfos, occasions: itemInfos.occasions })
             .then(response => navigate('/dressing'))
             .catch(err => setErrorMessage(err.response.data.message))
+
+        toast.promise(
+            editedItem,
+            {
+                loading: 'Loading',
+                success: () => `Item successfully updated!`,
+                error: () => `Error: ${errorMessage}`,
+            },
+            {
+                style: {
+                    minWidth: '250px',
+                },
+                success: {
+                    duration: 3000,
+                    icon: '✔',
+                },
+            }
+        );
     }
 
-    const isChecked = (occasion) => { if (itemInfos.occasions.includes(occasion)) { return true } }
-
     const deleteItem = () => {
-        axios.delete(`http://localhost:5005/dressing/item/${itemId}`)
+        const deletedItem = axios.delete(`http://localhost:5005/dressing/item/${itemId}`)
             .then(response => setItemInfos(response.data[0]))
             .then(() => navigate('/dressing'))
             .catch(err => console.log(err));
+
+        toast.promise(
+            deletedItem,
+            {
+                loading: 'Loading',
+                success: () => `Item successfully deleted!`,
+                error: () => `Error: ${errorMessage}`,
+            },
+            {
+                style: {
+                    minWidth: '250px',
+                },
+                success: {
+                    duration: 3000,
+                    icon: '✔',
+                },
+            }
+        );
     }
 
     const handleUpload = async (e) => {
@@ -107,7 +142,7 @@ function ViewItem() {
                 <input type="text" value={itemInfos.imageUrl} readOnly={true} />
                 <br /><br />
 
-                <button className="btn btn-primary" type="button" disabled={isUploading}>
+                <button className="btn btn-primary" type="button" disabled={isUploading} onClick={handleSubmit}>
                     {isUploading ? <><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...</>
                         : <>Edit Item</>}
                 </button>
