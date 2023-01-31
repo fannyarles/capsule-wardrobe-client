@@ -56,7 +56,8 @@ function Dressing() {
 
     const filterData = (e) => {
         if (e.target.value === '') { setFilteredData(null); return; }
-        setFilteredData([...dressingByItems].filter(item => item.brand.toLowerCase().includes(e.target.value.toLowerCase())));
+        setDisplay('item');
+        setFilteredData([...dressingByItems].filter(item => item.brand.toLowerCase().includes(e.target.value.toLowerCase()) || item.category.toLowerCase().includes(e.target.value.toLowerCase())));
     }
 
     useEffect(() => {
@@ -88,35 +89,66 @@ function Dressing() {
     }, [dressingByItems, dressingByStyles]);
 
 
-    return <div>
+    return (
+        <div className="row">
+            <div className="col col-12 mb-5">
+                <h1>Dressing</h1>
+            </div>
 
-        <h1>Dressing</h1>
 
-        {loading ? <Loader /> :
-            <>
-                <div className="filters my-4">
-                    <button className="mx-2" onClick={() => setDisplay('item')}>Display all items</button>
-                    <button className="mx-2" onClick={() => setDisplay('category')}>Display categories</button>
-                    <button className="mx-2" onClick={() => setDisplay('style')}>Display styles</button>
-                    {display === 'item' && <input type="search" placeholder={`Search by ${display}`} onChange={filterData} />}
-                </div>
+            {loading ? <Loader /> :
+                <>
 
-                <div className="dressing-items d-flex flex-wrap">
-                    {!filteredData ?
-                        <>
-                            {display === 'item' && dressingByItems.map(item => <ItemCard key={item._id} item={item} />)}
-                            {display === 'category' && dressingByCategories.map(cat => <CatCard key={cat.id} cat={cat} />)}
-                            {display === 'style' && dressingByStyles.map(style => <StyleCard key={style.id} style={style} />)}
-                        </>
-                        :
-                        <>
-                            {display === 'item' && filteredData.map(item => <ItemCard key={item._id} item={item} />)}
-                        </>
-                    }
-                </div>
-            </>
-        }
-    </div>
+                    <div className="col col-12">
+                        <div className="row my-2 align-items-end">
+                            <div className="col col-6 text-start align-self-baseline">
+                                {display === 'item' && <p>{dressingByItems.length} items</p>}
+                                {display === 'category' && <p> categories</p>}
+                                {display === 'style' && <p>{dressingByItems.length} items</p>}
+                            </div>
+                            <div className="col col-1 text-end align-self-baseline">
+                                <label htmlFor="filter-by">Filter by</label>
+                            </div>
+                            <div className="col col-2">
+                                <select id="filter-by" className="form-select py-3" aria-label="Filter by" value={display} onChange={e => setDisplay(e.target.value)}>
+                                    <option value="item">Items</option>
+                                    <option value="category">Categories</option>
+                                    <option value="style">Styles</option>
+                                </select>
+                            </div>
+                            <div className="col col-3">
+                                <div className="input-group">
+                                    <input className="form-control border-end-0 border py-3 ps-4" type="search" placeholder="Search items by category or brand" id=" example-search-input" onChange={filterData} />
+                                    <span className="input-group-append">
+                                        <button className="btn btn-outline-secondary bg-white border-start-0 border-bottom border ms-n5 py-3 px-4" type="button">
+                                            <i className="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="col col-12">
+                        <div className="row d-flex flex-wrap">
+                            {!filteredData ?
+                                <>
+                                    {display === 'item' && dressingByItems.map(item => <ItemCard key={item._id} item={item} />)}
+                                    {display === 'category' && dressingByCategories.map(cat => <CatCard key={cat.id} cat={cat} />)}
+                                    {display === 'style' && dressingByStyles.map(style => <StyleCard key={style.id} style={style} />)}
+                                </>
+                                :
+                                <>
+                                    {filteredData.map(item => <ItemCard key={item._id} item={item} />)}
+                                    {!filteredData.length && <p className="mt-5 text-muted text-start">No results match this search.</p>}
+                                </>
+                            }
+                        </div>
+                    </div>
+                </>
+            }
+        </div>
+    );
 }
 
 export default Dressing;

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
 function NavBar() {
@@ -8,24 +8,24 @@ function NavBar() {
     // console.log(isLoggedIn)
 
     return (
-        <nav className="navbar navbar-light pt-4 pb-5 mb-5">
-            <Link to="/" className="mx-5">Home</Link>
+        <div className="container">
+            <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between px-4 py-4">
+                <NavLink to="/" className="d-flex align-items-center col-md-3 mb-md-0 text-dark text-decoration-none">Home</NavLink>
 
-            {!isLoggedIn ?
-                <>
-                    <Link to="/login" className="mx-5">Login</Link>
-                    <Link to="/signup" className="mx-5">Signup</Link>
-                </>
-                :
-                <>
-                    <Link to="/dressing" className="mx-5">My Dressing</Link>
-                    <Link to="/dressing/item/add" className="mx-5">Add Clothing Items</Link>
-                    <Link to="/outfits/random" className="mx-5">Random Outfit</Link>
-                    <Link to="/outfits/saved" className="mx-5">Saved Outfits</Link>
-                    <Link to="/" className="mx-5" onClick={() => logoutUser()}>Logout</Link>
-                </>
-            }
-        </nav>
+                <ul className="nav col-12 col-md-auto justify-content-center mb-md-0">
+                    <li onClick={() => document.getElementById('banner').scrollIntoView()}><NavLink to='#banner' className="nav-link px-5 link-dark">Home</NavLink></li>
+                    <li onClick={() => document.getElementById('about').scrollIntoView()}><NavLink to='#about' className="nav-link px-5 link-dark">About MinFit</NavLink></li>
+                    <li onClick={() => document.getElementById('features').scrollIntoView()}><NavLink to='#features' className="nav-link px-5 link-dark">Features</NavLink></li>
+                    <li onClick={() => document.getElementById('pricing').scrollIntoView()}><NavLink to='#pricing' className="nav-link px-5 link-dark">Pricing</NavLink></li>
+                    <li onClick={() => document.getElementById('faq').scrollIntoView()}><NavLink to='#faq' className="nav-link px-5 link-dark">FAQ</NavLink></li>
+                </ul>
+
+                <div className="col-md-3 text-end">
+                    <NavLink to='/login' className="btn btn-outline-primary me-3">Login</NavLink>
+                    <NavLink to='/signup' className="btn btn-primary">Signup</NavLink>
+                </div>
+            </header>
+        </div>
     )
 }
 

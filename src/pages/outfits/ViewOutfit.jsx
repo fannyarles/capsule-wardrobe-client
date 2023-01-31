@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader";
 import { toast } from "react-hot-toast";
+import OutfitCard from "../../components/OutfitCard";
 
 function ViewOutfit() {
 
@@ -36,7 +37,7 @@ function ViewOutfit() {
                     case 'Footwear':
                         setOutfitItems({ ...outfitItems, footwear: response.data });
                         break;
-                    case 'One-Piece':
+                    case 'One-Pieces':
                         setOutfitItems({ ...outfitItems, piece: response.data });
                         break;
                     default:
@@ -80,62 +81,79 @@ function ViewOutfit() {
         }
     }, [outfit])
 
-    return (
-        <div id="view-outfit-page">
-            {!outfitItems ?
+    return (<>
+        {
+            !outfit || !outfitItems ?
                 <Loader />
                 :
                 <>
-                    <div className="row">
-                        <div className="col-12">
-                            {outfit.type === "onePiece" &&
-                                <>
-                                    <img src={outfit.piece.imageUrl} className={outfit.piece.type.toLowerCase()} alt="item" width="150px" />
-                                    <img src={outfit.footwear.imageUrl} className={outfit.footwear.type.toLowerCase()} alt="item" width="150px" />
-                                </>
-                            }
-                            {outfit.type === "twoPiece" &&
-                                <div className="row justify-content-md-center">
-                                    <div className="col col-2">
-                                        <div className={"item " + outfitItems.top.type.toLowerCase()}>
-                                            <img src={outfitItems.top.imageUrl} alt="item" />
-                                            <div className="item-infos">
-                                                <h4>{outfitItems.top.category} from {outfitItems.top.brand}</h4>
-                                                <button className="btn btn-primary" onClick={() => switchItem(outfitItems.top.type, outfitItems.top._id)}>Switch!</button>
+                    <div className="row d-flex text-start align-items-start justify-content-start my-3">
+                        <div className="col-3 d-flex flex-column justify-content-between">
+                            <div>
+                                <h1>View outfit</h1>
+                                <p className="occasions-tags">{occasion}</p>
+
+                                {outfit.type === "onePiece" &&
+                                    <>
+                                        <div className="card border p-4 mb-4">
+                                            <div className="row d-flex align-items-center">
+                                                <div className="col col-12">
+                                                    <h6>{outfitItems.piece.category} from {outfitItems.piece.brand}</h6>
+                                                    <button className="btn btn-primary" onClick={() => switchItem(outfitItems.piece.type, outfitItems.piece._id)}>Switch!</button>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className={"item " + outfitItems.footwear.type.toLowerCase()}>
-                                            <img src={outfitItems.footwear.imageUrl} alt="item" />
-                                            <div className="item-infos">
-                                                <h4>{outfitItems.footwear.category} from {outfitItems.footwear.brand}</h4>
-                                                <button className="btn btn-primary" onClick={() => switchItem(outfitItems.footwear.type, outfitItems.footwear._id)}>Switch!</button>
+                                        <div className="card border p-4">
+                                            <div className="row d-flex align-items-center">
+                                                <div className="col col-12">
+                                                    <h6>{outfitItems.footwear.category} from {outfitItems.footwear.brand}</h6>
+                                                    <button className="btn btn-primary" onClick={() => switchItem(outfitItems.footwear.type, outfitItems.footwear._id)}>Switch!</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="col col-2">
-                                        <div className={"item " + outfitItems.bottoms.type.toLowerCase()}>
-                                            <img src={outfitItems.bottoms.imageUrl} alt="item" />
-                                            <div className="item-infos">
-                                                <h4>{outfitItems.bottoms.category} from {outfitItems.bottoms.brand}</h4>
-                                                <button className="btn btn-primary" onClick={() => switchItem(outfitItems.bottoms.type, outfitItems.bottoms._id)}>Switch!</button>
+                                    </>
+                                }
+                                {outfit.type === "twoPiece" &&
+                                    <>
+                                        <div className="card border p-4 mb-4">
+                                            <div className="row d-flex align-items-center">
+                                                <div className="col col-12">
+                                                    <h6>{outfit.top.category} from {outfit.top.brand}</h6>
+                                                    <button className="btn btn-primary" onClick={() => switchItem(outfit.top.type, outfit.top._id)}>Switch!</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            }
+                                        <div className="card border p-4 mb-4">
+                                            <div className="row d-flex align-items-center">
+                                                <div className="col col-12">
+                                                    <h6>{outfit.bottoms.category} from {outfit.bottoms.brand}</h6>
+                                                    <button className="btn btn-primary" onClick={() => switchItem(outfit.bottoms.type, outfit.bottoms._id)}>Switch!</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="card border p-4">
+                                            <div className="row d-flex align-items-center">
+                                                <div className="col col-12">
+                                                    <h6>{outfit.footwear.category} from {outfit.footwear.brand}</h6>
+                                                    <button className="btn btn-primary" onClick={() => switchItem(outfit.footwear.type, outfit.footwear._id)}>Switch!</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </>
+                                }
+                            </div>
+                            <div className="mt-5">
+                                {errorMessage && <p>{errorMessage}</p>}
+                                <button className="btn btn-primary btn-lg" onClick={handleSave}>Save Outfit</button>
+                            </div>
                         </div>
-                    </div>
-                    <div className="row outfit-save">
-                        <div className="col-12">
-                            {errorMessage && <p>{errorMessage}</p>}
-                            <button className="btn btn-primary" onClick={handleSave}>Save Outfit</button>
+                        <div className="col-6">
+                            <OutfitCard outfit={outfitItems} type={outfit.type} />
                         </div>
                     </div>
                 </>
-            }
-
-        </div>
-    );
+        }
+    </>);
 }
 
 export default ViewOutfit;

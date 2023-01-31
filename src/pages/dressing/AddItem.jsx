@@ -5,6 +5,8 @@ import dressingApi from "./../../services/DressingApi.service";
 import brandsData from './../../data/brands.data';
 import { categoriesData, occasionsData } from './../../data/itemsParams.data'
 import { toast } from "react-hot-toast";
+import itemDefault from '../../assets/item-default.jpg';
+import Loader from "../../components/Loader";
 
 function AddItem() {
 
@@ -24,12 +26,14 @@ function AddItem() {
 
     const selectOccasion = e => {
         const value = e.target.getAttribute('data-outfit-occasion');
-        if (e.target.classList.contains("selected")) {
-            e.target.classList.remove("selected")
+        if (e.target.classList.contains("btn-info")) {
+            e.target.classList.remove("btn-info")
+            e.target.classList.add("btn-outline-info")
             const filteredOccasions = [...itemInfos.occasions].filter(occ => occ !== value);
             setItemInfos({ ...itemInfos, occasions: filteredOccasions })
         } else {
-            e.target.classList.add("selected")
+            e.target.classList.remove("btn-outline-info")
+            e.target.classList.add("btn-info")
             setItemInfos({ ...itemInfos, occasions: [...itemInfos.occasions, value] })
         }
     }
@@ -83,41 +87,67 @@ function AddItem() {
         }
     }, [isUserLoading, user])
 
-    return <div id="add-item form-page">
-        <h1>Add new clothing item</h1>
+    return (<>
+        <div className="row mb-4">
+            <div className="col col-12">
+                <h1>Add New Item</h1>
+            </div>
+        </div>
 
-        {errorMessage && <p>{errorMessage}</p>}
+        <div className="row">
 
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="category">Category of clothing <span className="required">(Required)</span></label><br />
-            <select name="category" value={itemInfos.category} onChange={handleInputChange}>
-                {categoriesData.map(cat => <>
-                    <optgroup key={cat.name} label={cat.name}>
-                        {cat.items.map(item => <option key={item}>{item}</option>)}
-                    </optgroup>
-                </>)}
-            </select><br /><br />
+            <form onSubmit={handleSubmit}>
 
-            <label htmlFor="brand">Brand</label><br />
-            <input list="brands" id="brand" name="brand" value={itemInfos.brand} onChange={handleInputChange} autoComplete="off" />
-            <datalist id="brands">
-                {brandsData.map(brand => <option key={brand} value={brand} />)}
-            </datalist><br /><br />
+                <div className="col col-12">
 
-            <label htmlFor="occasion">Occasions <span className="required">(Required)</span></label><br />
-            {occasionsData.map(el => <p data-outfit-occasion={el.value} key={el.value} onClick={selectOccasion} className="occasion">{el.name}</p>)}<br /><br />
+                    <div className="row flex-row justify-content-center">
 
-            <label htmlFor="picture">Picture <span className="required">(Required)</span></label><br />
-            <input name="picture" type="file" onChange={handleUpload} />
-            <br /><br />
+                        <div className="col col-4">
+                            {isUploading && <Loader />}
+                            {!isUploading && <img src={itemInfos.imageUrl === '' ? itemDefault : itemInfos.imageUrl} alt='item-pic' width="100%" />}
+                        </div>
 
-            <button className="btn btn-primary" type="button" disabled={isUploading} onClick={handleSubmit}>
-                {isUploading ? <><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...</>
-                    : <>Add Item</>}
-            </button>
-        </form>
+                        <div className="col col-4 text-start d-flex flex-column justify-content-between">
 
-    </div>
+                            <div>
+                                <label htmlFor="category" className="mt-0">Category<span className="required">(Required)</span></label><br />
+                                <select name="category" value={itemInfos.category} onChange={handleInputChange}>
+                                    {categoriesData.map(cat => <>
+                                        <optgroup key={cat.name} label={cat.name}>
+                                            {cat.items.map(item => <option key={item}>{item}</option>)}
+                                        </optgroup>
+                                    </>)}
+                                </select><br /><br />
+
+                                <label htmlFor="occasion">Occasions <span className="required">(Required)</span></label><br />
+                                {occasionsData.map(el => <p data-outfit-occasion={el.value} key={el.value} onClick={selectOccasion} className={itemInfos.occasions.includes(el.value) ? "occasion btn btn-info mx-1" : "occasion btn btn-outline-info mx-1"} >{el.name}</p>)}<br /><br />
+
+                                <label htmlFor="brand">Brand</label><br />
+                                <input list="brands" id="brand" name="brand" value={itemInfos.brand} onChange={handleInputChange} autoComplete="off" />
+                                <datalist id="brands">
+                                    {brandsData.map(brand => <option key={brand} value={brand} />)}
+                                </datalist><br /><br />
+
+                                <label htmlFor="picture">Picture <span className="required">(Required)</span></label><br />
+                                <input name="picture" type="file" onChange={handleUpload} placeholder="Brand" />
+                            </div>
+
+                            <div className="col col-12 mt-5">
+                                {errorMessage && <><p class="alert alert-danger d-inline-flex" role="alert">{errorMessage}</p><br /></>}
+                                <button className="btn btn-primary btn-lg mx-1" type="button" disabled={isUploading} onClick={handleSubmit}>
+                                    {isUploading ? <><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...</>
+                                        : <>Add Item</>}
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </>);
 }
 
 export default AddItem;

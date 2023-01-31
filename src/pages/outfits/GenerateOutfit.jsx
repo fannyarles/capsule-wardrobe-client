@@ -10,37 +10,14 @@ function RandomOutfit() {
     const [itemParams, setItemParams] = useState({ category: '', pieceItem: '', occasion: '' });
     const [errorMessage, setErrorMessage] = useState('');
 
-    const selectOccasion = e => {
-        const value = e.target.getAttribute('data-outfit-occasion');
-        document.querySelectorAll("p.occasion").forEach(el => { if (el.classList.contains("selected")) { el.classList.remove("selected") } });
-        e.target.classList.add("selected");
-        setItemParams({ ...itemParams, occasion: value });
-    }
+    const selectOccasion = e => setItemParams({ ...itemParams, occasion: e.target.getAttribute('data-outfit-occasion') });
 
     const selectType = e => {
-        if (e.target.classList.contains("selected")) {
-            e.target.classList.remove("selected");
-            setItemParams({ ...itemParams, category: '', pieceItem: '' });
-        } else {
-            const value = e.target.getAttribute('data-outfit-category');
-            document.querySelectorAll("p.category").forEach(el => {
-                if (el.classList.contains("selected")) { el.classList.remove("selected") };
-            });
-            e.target.classList.add("selected");
-            document.querySelectorAll('[data-outfit-item=""]').forEach(el => el.classList.add("selected"));
-            setItemParams({ ...itemParams, category: value, pieceItem: '' });
-
-        }
+        const value = e.target.getAttribute('data-outfit-category');
+        setItemParams({ ...itemParams, category: value, pieceItem: '' });
     }
 
-    const selectPieceItem = e => {
-        const value = e.target.getAttribute('data-outfit-item');
-        document.querySelectorAll("p.pieceItem").forEach(el => {
-            if (el.classList.contains("selected")) { el.classList.remove("selected") };
-        });
-        e.target.classList.add("selected");
-        setItemParams({ ...itemParams, pieceItem: value });
-    }
+    const selectPieceItem = e => setItemParams({ ...itemParams, pieceItem: e.target.getAttribute('data-outfit-item') });
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -54,40 +31,55 @@ function RandomOutfit() {
     }
 
     return (<>
-        <h1>Generate random outfit</h1>
 
-        <p>Select parameters</p>
+        <div className="row mb-4 text-start pt-0">
+            <div className="col col-12">
+                <h1>Generate random outfit</h1>
+            </div>
+        </div>
+        <div className="row mb-4 text-start">
+            <div className="col col-12">
 
-        {errorMessage && <p>{errorMessage}</p>}
+                <p className="text-muted fw-light">Select parameters below to create your outfit.</p>
 
-        <form onSubmit={handleSubmit} id="random-generator-form">
+                {errorMessage && <p className="alert alert-danger d-inline-flex" role="alert">{errorMessage}</p>}
 
-            <label htmlFor="occasions">Occasion <span className="required">(Required)</span></label><br />
-            {occasionsData.map(el => <p data-outfit-occasion={el.value} key={el.value} onClick={selectOccasion} className="occasion">{el.name}</p>)}
-            <br /><br />
+                <form onSubmit={handleSubmit}>
+                    <div className="row mb-4">
+                        <div className="col col-12">
 
-            <label htmlFor="category">Category</label><br />
-            <p data-outfit-category="" className="category selected" onClick={selectType}>Any</p>
-            <p data-outfit-category="twoPiece" className="category" onClick={selectType}>Top / Bottoms</p>
-            <p data-outfit-category="onePiece" className="category" onClick={selectType}>One-piece</p><br />
-            {itemParams.category === "twoPiece" &&
-                <>
-                    <p data-outfit-item="" className="pieceItem selected" onClick={selectPieceItem}>Any</p>
-                    <p data-outfit-item="Skirt" className="pieceItem" onClick={selectPieceItem}>Skirt</p>
-                    <p data-outfit-item="Pants" className="pieceItem" onClick={selectPieceItem}>Pants</p>
-                </>
-            }
-            {itemParams.category === "onePiece" &&
-                <>
-                    <p data-outfit-item="" className="pieceItem selected" onClick={selectPieceItem}>Any</p>
-                    <p data-outfit-item="Dress" className="pieceItem" onClick={selectPieceItem}>Dress</p>
-                    <p data-outfit-item="Pantsuit" className="pieceItem" onClick={selectPieceItem}>Pantsuit</p>
-                </>
-            }
-            <br /><br />
+                            <label htmlFor="occasions">Occasion <span className="required">(Required)</span></label><br />
+                            {occasionsData.map(el => <p data-outfit-occasion={el.value} key={el.value} onClick={selectOccasion} className={itemParams.occasion === el.value ? "occasion btn btn-info mx-1" : "occasion btn btn-outline-info mx-1"}>{el.name}</p>)}
+                            <br />
 
-            <input type="submit" value="Generate outfit" />
-        </form>
+                            <label htmlFor="category">Category</label><br />
+                            <p data-outfit-category="" className={itemParams.category === "" ? "category btn btn-info mx-1" : "category btn btn-outline-info mx-1"} onClick={selectType}>Any</p>
+                            <p data-outfit-category="twoPiece" className={itemParams.category === "twoPiece" ? "category btn btn-info mx-1" : "category btn btn-outline-info mx-1"} onClick={selectType}>Top / Bottoms</p>
+                            <p data-outfit-category="onePiece" className={itemParams.category === "onePiece" ? "category btn btn-info mx-1" : "category btn btn-outline-info mx-1"} onClick={selectType}>One-piece</p><br />
+                            {itemParams.category === "twoPiece" &&
+                                <>
+                                    <p data-outfit-item="" className={itemParams.pieceItem === "" ? "pieceItem btn btn-info mx-1" : "pieceItem btn btn-outline-info mx-1"} onClick={selectPieceItem}>Any</p>
+                                    <p data-outfit-item="Skirt" className={itemParams.pieceItem === "Skirt" ? "pieceItem btn btn-info mx-1" : "pieceItem btn btn-outline-info mx-1"} onClick={selectPieceItem}>Skirt</p>
+                                    <p data-outfit-item="Pants" className={itemParams.pieceItem === "Pants" ? "pieceItem btn btn-info mx-1" : "pieceItem btn btn-outline-info mx-1"} onClick={selectPieceItem}>Pants</p>
+                                </>
+                            }
+                            {itemParams.category === "onePiece" &&
+                                <>
+                                    <p data-outfit-item="" className={itemParams.pieceItem === "" ? "pieceItem btn btn-info mx-1" : "pieceItem btn btn-outline-info mx-1"} onClick={selectPieceItem}>Any</p>
+                                    <p data-outfit-item="Dress" className={itemParams.pieceItem === "Dress" ? "pieceItem btn btn-info mx-1" : "pieceItem btn btn-outline-info mx-1"} onClick={selectPieceItem}>Dress</p>
+                                    <p data-outfit-item="Pantsuit" className={itemParams.pieceItem === "Pantsuit" ? "pieceItem btn btn-info mx-1" : "pieceItem btn btn-outline-info mx-1"} onClick={selectPieceItem}>Pantsuit</p>
+                                </>
+                            }
+                        </div>
+                    </div>
+                    <div className="row mt-5 mb-4">
+                        <div className="col col-12">
+                            <input type="submit" value="Generate outfit" className="btn btn-lg btn-primary" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
     </>
     );
