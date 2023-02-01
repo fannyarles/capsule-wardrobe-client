@@ -1,0 +1,43 @@
+.save-outfit-icon {
+    position: absolute;
+    z-index: 2;
+}
+
+.save-outfit-icon {
+    color: tomato;
+    font-size: xx-large;
+}
+
+.save-outfit-icon .bi-heart-fill {
+    display: none;
+}
+
+.save-outfit-icon:hover .bi-heart-fill {
+    display: initial;
+}
+
+.save-outfit-icon:hover .bi-heart {
+    display: none;
+}
+
+.save-outfit-icon i:hover {
+    color: tomato;
+    font-size: xx-large;
+}
+
+.card-actions {
+    position: absolute;
+    z-index: 2;
+}
+
+.edit-outfit-icon {
+    color: tomato;
+    font-size: xx-large;
+    transition: 2s;
+}
+
+.edit-outfit-icon:hover {
+    transform-origin: center;
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+}

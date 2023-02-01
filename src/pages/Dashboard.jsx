@@ -105,15 +105,17 @@ function Dashboard() {
                 </div>
             </div>
             <div className="col col-4">
-                <div className="card">
+                <div className="card ">
                     <h6 className="mb-4">Top 5 outfits categories</h6>
                     {topOutfitCat &&
                         topOutfitCat.map(cat => {
                             return (
                                 <div key={cat._id} className="row d-flex align-items-center mb-3">
-                                    <div className="col col-12 d-flex align-items-baseline">
+                                    <div className="col col-6 d-flex align-items-baseline">
                                         <p className="occasions-tags">{cat.name}</p>
-                                        <p className="ms-3 mt-0 pt-0">{cat.length ? cat.length : "0"} {cat.length === 1 ? "outfit" : "outfits"}</p>
+                                    </div>
+                                    <div className="col col-6 d-flex align-items-baseline justify-content-end text-end">
+                                        <p>{cat.length ? cat.length : "0"} {cat.length === 1 ? "outfit" : "outfits"}</p>
                                     </div>
                                 </div>
                             );

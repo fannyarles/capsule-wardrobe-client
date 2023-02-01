@@ -24,6 +24,10 @@ import ViewOutfit from './pages/outfits/ViewOutfit';
 import EditOutfit from './pages/outfits/EditOutfit';
 import SavedOutfits from './pages/outfits/SavedOutfits';
 
+import SubscriptionPage from './pages/stripe/SubscriptionPage';
+
+
+
 function App() {
 
   const { isLoggedIn } = useContext(AuthContext);
@@ -58,6 +62,7 @@ function App() {
               <Route path="/outfits/saved/" element={<SavedOutfits />} />
 
               <Route path="/account/" element={<Account />} />
+              <Route path="/subscribe/" element={<SubscriptionPage />} />
             </Routes>
           </div>
         </div>

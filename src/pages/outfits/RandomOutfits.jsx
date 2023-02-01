@@ -3,6 +3,7 @@ import OutfitCard from "../../components/OutfitCard";
 import Loader from "../../components/Loader";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import './outfits.css';
 
 function RandomOutfits() {
 
@@ -23,6 +24,7 @@ function RandomOutfits() {
                 .catch(err => setErrorMessage(err.response.data.message))
         }
     }, [itemParams]);
+    const saveOutfitIcons = document.querySelectorAll('.save-outfit-icon');
 
     return (<>
         <div className="row text-start">
@@ -51,10 +53,15 @@ function RandomOutfits() {
                             {items.outfits.map(outfit => {
                                 return <>
                                     <div className="col col-4 d-flex align-content-stretch">
-                                        <div className="save-outfit-button">
-                                            <Link to='/outfits/random/view/single' state={{ occasion: items.occasion, selectedOutfit: outfit }} className="btn btn-outline-warning">❤️</Link>
+                                        <div className="card">
+                                            <div className="save-outfit-button">
+                                                <Link to='/outfits/random/view/single' state={{ occasion: items.occasion, selectedOutfit: outfit }} className="save-outfit-icon">
+                                                    <i class="bi bi-heart"></i>
+                                                    <i class="bi bi-heart-fill"></i>
+                                                </Link>
+                                            </div>
+                                            <OutfitCard occasion={items.occasion} outfit={outfit} type={outfit.type} />
                                         </div>
-                                        <OutfitCard occasion={items.occasion} outfit={outfit} type={outfit.type} />
                                     </div>
                                 </>
                             })}

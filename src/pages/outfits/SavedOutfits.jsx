@@ -44,10 +44,12 @@ function SavedOutfits() {
                                         return (
                                             <div className="col col-4 d-flex align-content-stretch">
                                                 <div className="card-actions d-flex align-items-baseline">
-                                                    <p className="occasions-tags">{outfit.occasion}</p>
-                                                    <div className="save-outfit-button ms-2">
-                                                        <Link to={`/outfits/view/${outfit._id}`} className="btn btn-sm btn-outline-warning">Edit</Link>
+                                                    <div className="edit-outfit-icon ms-2">
+                                                        <Link to={`/outfits/view/${outfit._id}`} className="me-3">
+                                                            <i class="bi bi-arrow-repeat"></i>
+                                                        </Link>
                                                     </div>
+                                                    <p className="occasions-tags">{outfit.occasion}</p>
                                                 </div>
                                                 <OutfitCard key={outfit._id} from="savedOutfits" outfit={outfit} type={outfit.type} />
                                             </div>);

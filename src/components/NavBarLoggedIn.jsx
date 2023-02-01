@@ -24,6 +24,7 @@ function NavBar() {
                         <img src={user.avatarUrl} alt="avatar" className="navbar-avatar me-3" />
                         My Account
                     </Link>
+                    <Link to="/subscribe" className="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none">Personal Shopper</Link>
                     <Link to="/" className="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none" onClick={() => logoutUser()}>Logout</Link>
                 </div>
 
