@@ -90,7 +90,7 @@ function Dressing() {
 
 
     return (
-        <div className="row">
+        <div className="row text-start">
             <div className="col col-12 mb-5">
                 <h1>Dressing</h1>
             </div>

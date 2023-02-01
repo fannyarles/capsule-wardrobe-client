@@ -29,7 +29,7 @@ function App() {
   const { isLoggedIn } = useContext(AuthContext);
 
   let mainStyle = {};
-  if (isLoggedIn) mainStyle = { marginLeft: "280px" }
+  if (isLoggedIn) mainStyle = { marginLeft: "280px", minHeight: "100vh" }
 
   return (
     <div className="App">

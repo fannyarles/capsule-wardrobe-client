@@ -6,6 +6,7 @@ html {
 body {
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
+  min-height: 100vh;
 }
 
 h1 {
@@ -106,8 +107,7 @@ input[type="file"] {
 
 #view-outfit-page {
   margin: auto;
-  position: relative;
-  height: 70vh;
+  position: relative; 
 }
 
 #view-outfit-page .item {

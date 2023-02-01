@@ -11,6 +11,7 @@ function NavBar() {
             <div className="row">
                 <div className="col col-12">
                     <h2><Link to="/dressing" className="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none">LOGO</Link></h2>
+                    <Link to="/" className="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none">Dashboard</Link>
                     <Link to="/dressing" className="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none">My Dressing</Link>
                     <Link to="/dressing/item/add" className="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none">Add Clothing Items</Link>
                     <Link to="/outfits/random" className="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none">Random Outfit</Link>

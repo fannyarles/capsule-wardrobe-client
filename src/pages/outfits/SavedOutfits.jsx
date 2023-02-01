@@ -32,6 +32,14 @@ function SavedOutfits() {
                         <div className="row">
                             <div className="col col-12">
                                 <div className="d-inline-flex flex-wrap">
+
+                                    {!outfits.length &&
+                                        <div className="row d-inline-flex">
+                                            <p>No outfits yet.</p>
+                                            <Link to='/outfits/random' className="btn btn-primary">Create outfits</Link>
+                                        </div>
+                                    }
+
                                     {outfits.map(outfit => {
                                         return (
                                             <div className="col col-4 d-flex align-content-stretch">
@@ -44,6 +52,7 @@ function SavedOutfits() {
                                                 <OutfitCard key={outfit._id} from="savedOutfits" outfit={outfit} type={outfit.type} />
                                             </div>);
                                     })}
+
                                 </div>
                             </div>
                         </div>

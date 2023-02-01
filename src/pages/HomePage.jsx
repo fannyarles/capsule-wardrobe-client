@@ -113,31 +113,25 @@ function HomePage() {
                 <div className="d-flex position-relative overflow-hidden text-start text-light">
                     <div className="col-md-3 p-lg-3 mx-auto">
                         <h6 className="fw-light">About us</h6>
-                        <p className="fw-light">
-                            <ul>
-                                <li>Our Story</li>
-                                <li>Blog</li>
-                            </ul>
-                        </p>
+                        <ul className="fw-light">
+                            <li>Our Story</li>
+                            <li>Blog</li>
+                        </ul>
                     </div>
                     <div className="col-md-3 p-lg-3 mx-auto">
                         <h6 className="fw-light">Contact</h6>
-                        <p className="fw-light">
-                            <ul>
-                                <li>Contact us</li>
-                                <li>FAQ</li>
-                            </ul>
-                        </p>
+                        <ul className="fw-light">
+                            <li>Contact us</li>
+                            <li>FAQ</li>
+                        </ul>
                     </div>
                     <div className="col-md-3 p-lg-3 mx-auto">
                         <h6 className="fw-light">Confidentiality</h6>
-                        <p className="fw-light">
-                            <ul>
-                                <li>Privacy Policy</li>
-                                <li>Cookie Policy</li>
-                                <li>Terms & Conditions</li>
-                            </ul>
-                        </p>
+                        <ul className="fw-light">
+                            <li>Privacy Policy</li>
+                            <li>Cookie Policy</li>
+                            <li>Terms & Conditions</li>
+                        </ul>
                     </div>
                 </div>
             </div>

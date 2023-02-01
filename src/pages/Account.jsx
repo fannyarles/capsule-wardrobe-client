@@ -58,20 +58,20 @@ function Account() {
     }, [user])
 
     return (<>
-        <div className="row mb-4">
+        <div className="row mb-4 text-start">
             <div className="col col-12">
                 <h1>Edit Account</h1>
             </div>
         </div>
 
-        <div className="row">
+        <div className="row text-start">
 
             {!userInfos && <Loader />}
 
             {userInfos &&
                 <form onSubmit={handleSubmit}>
 
-                    <div className="row d-flex text-start justify-content-center">
+                    <div className="row d-flex text-start justify-content-start">
 
                         <div className="col col-3">
                             <div style={{
@@ -86,20 +86,21 @@ function Account() {
                             {/* <img src={userInfos.avatarUrl === undefined ? defaultAvatar : userInfos.avatarUrl} alt="avatar" width={"100%"} /> */}
                         </div>
 
-                        <div className="col col-3">
+                        <div className="col col-4 d-flex flex-column align-content-start justify-content-between">
+                            <div>
+                                <label htmlFor="email" className="mt-0 pt-0">Email<span className="required">(Required)</span></label><br />
+                                <input type="email" name="email" id="email" value={userInfos.email} onChange={e => setUserInfos({ ...userInfos, email: e.target.value })} /><br /><br />
 
-                            {errorMessage && <p>{errorMessage}</p>}
-
-                            <label htmlFor="email">Email<span className="required">(Required)</span></label><br />
-                            <input type="email" name="email" id="email" value={userInfos.email} onChange={e => setUserInfos({ ...userInfos, email: e.target.value })} /><br /><br />
-
-                            <label htmlFor="avatar">Profile picture</label><br />
-                            <input type="file" id="avatar" name="avatar" onChange={e => handleUpload(e)} /><br /><br />
-
-                            <button className="btn btn-primary btn-lg mt-3" type="button" disabled={isUploading} onClick={handleSubmit}>
-                                {isUploading ? <><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...</>
-                                    : <>Update account</>}
-                            </button>
+                                <label htmlFor="avatar">Profile picture</label><br />
+                                <input type="file" id="avatar" name="avatar" onChange={e => handleUpload(e)} /><br /><br />
+                            </div>
+                            <div>
+                                {errorMessage && <p>{errorMessage}</p>}
+                                <button className="btn btn-primary btn-lg mt-3" type="button" disabled={isUploading} onClick={handleSubmit}>
+                                    {isUploading ? <><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...</>
+                                        : <>Update account</>}
+                                </button>
+                            </div>
                         </div>
 
                     </div>
