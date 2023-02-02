@@ -24,11 +24,11 @@ function Dashboard() {
         if (value === 'Dress' || value === 'Pantsuit') { setCategory('1'); setPiece(value); }
         if (value === 'Skirt' || value === 'Pants') { setCategory('2'); setPiece(value); }
     }
-
     const handleSubmit = e => {
         e.preventDefault();
         navigate(`/outfits/random/view/?occasion=${occasion}&cat=${category}&piece=${piece}`)
     }
+    if (topOutfitCat) console.log(topOutfitCat)
 
     useEffect(() => {
         UserApi.getTop5Items()
@@ -40,6 +40,7 @@ function Dashboard() {
         UserApi.getTop5Cats()
             .then(response => setTopOutfitCat(response))
             .catch(err => setErrorMessage(err.reponse.data.message));
+        if (topOutfitCat) console.logt(topOutfitCat)
     }, [isUserLoading])
 
     return <>
@@ -106,16 +107,16 @@ function Dashboard() {
             </div>
             <div className="col col-4">
                 <div className="card ">
-                    <h6 className="mb-4">Top 5 outfits categories</h6>
+                    <h6 className="mb-4">Top outfits categories</h6>
                     {topOutfitCat &&
-                        topOutfitCat.map(cat => {
+                        topOutfitCat.map((cat) => {
                             return (
                                 <div key={cat._id} className="row d-flex align-items-center mb-3">
                                     <div className="col col-6 d-flex align-items-baseline">
                                         <p className="occasions-tags">{cat.name}</p>
                                     </div>
                                     <div className="col col-6 d-flex align-items-baseline justify-content-end text-end">
-                                        <p>{cat.length ? cat.length : "0"} {cat.length === 1 ? "outfit" : "outfits"}</p>
+                                        <p>{cat.count} {cat.count === 1 ? "outfit" : "outfits"}</p>
                                     </div>
                                 </div>
                             );

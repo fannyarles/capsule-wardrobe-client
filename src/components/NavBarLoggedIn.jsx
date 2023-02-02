@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import defaultAvatar from './../assets/avatar-default.jpg';
 
 function NavBar() {
 
@@ -21,7 +22,15 @@ function NavBar() {
             <div className="row">
                 <div className="col col-12">
                     <Link to="/account" className="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none">
-                        <img src={user.avatarUrl} alt="avatar" className="navbar-avatar me-3" />
+                        <div className="navbar-avatar me-3"
+                            style={{
+                                backgroundImage: `url("${user.avatarUrl ? user.avatarUrl : defaultAvatar}")`,
+                                backgroundRepeat: "no-repeat",
+                                backgroundSize: "cover",
+                                backgroundPosition: "center center"
+                            }}>
+                        </div>
+                        {/* <img src={user.avatarUrl ? user.avatarUrl : defaultAvatar} alt="avatar" className="navbar-avatar" /> */}
                         My Account
                     </Link>
                     <Link to="/subscribe" className="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none">Personal Shopper</Link>
