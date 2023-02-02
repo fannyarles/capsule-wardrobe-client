@@ -1,4 +1,5 @@
 import axios from "axios";
+const storedToken = localStorage.getItem('authToken');
 
 const api = axios.create({
     // make sure you use PORT = 5005 (the port where our server is running)
@@ -7,31 +8,31 @@ const api = axios.create({
 });
 
 const addItem = ({ category, brand, occasions, imageUrl, ownerId }) => {
-    return api.post("/dressing/item/add", { category, brand, occasions, imageUrl, ownerId })
+    return api.post("/dressing/item/add", { category, brand, occasions, imageUrl, ownerId }, { headers: { "Authorization": `Bearer ${storedToken}` } })
         .then(response => response.data)
         .catch(err => console.error(err))
 }
 
 const updateItem = ({ itemId, type, brand, occasions, imageUrl, ownerId }) => {
-    return api.put(`/dressing/item/${itemId}`, { type, brand, occasions, imageUrl, ownerId })
+    return api.put(`/dressing/item/${itemId}`, { type, brand, occasions, imageUrl, ownerId }, { headers: { "Authorization": `Bearer ${storedToken}` } })
         .then(response => response.data)
         .catch(err => console.error(err))
 }
 
 const uploadPhoto = (uploadData) => {
-    return api.post("/dressing/item/uploadPic", uploadData)
+    return api.post("/dressing/item/uploadPic", uploadData, { headers: { "Authorization": `Bearer ${storedToken}` } })
         .then(response => response.data)
         .catch(err => console.error(err))
 }
 
 const updatePhoto = (uploadData) => {
-    return api.post("/dressing/item/:itemId/updatePic", uploadData)
+    return api.post("/dressing/item/:itemId/updatePic", uploadData, { headers: { "Authorization": `Bearer ${storedToken}` } })
         .then(response => response.data)
         .catch(err => console.error(err))
 }
 
 const getDressing = (ownerId) => {
-    return api.get("/dressing", { ownerId })
+    return api.get("/dressing", { ownerId }, { headers: { "Authorization": `Bearer ${storedToken}` } })
         .then(response => response.data)
         .catch(err => console.error(err))
 

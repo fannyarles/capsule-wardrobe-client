@@ -10,6 +10,8 @@ import Loader from "../../components/Loader";
 
 function Dressing() {
 
+    const storedToken = localStorage.getItem('authToken');
+
     const { isUserLoading, isLoggedIn, user } = useContext(AuthContext);
     const [dressingByItems, setDressingByItems] = useState(null);
     const [dressingByCategories, setDressingByCategories] = useState([]);
@@ -62,7 +64,7 @@ function Dressing() {
 
     useEffect(() => {
         if (user?.id) {
-            axios.get(`${process.env.REACT_APP_API_URL}/dressing/user/${user.id}`)
+            axios.get(`${process.env.REACT_APP_API_URL}/dressing/user/${user.id}`, { headers: { "Authorization": `Bearer ${storedToken}` } })
                 .then(response => setDressingByItems(response.data))
                 .catch(err => console.error(err))
         }

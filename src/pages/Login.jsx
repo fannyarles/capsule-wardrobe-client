@@ -21,7 +21,7 @@ function Login() {
             .then(response => {
                 storeToken(response.authToken);
                 authenticateUser();
-                navigate('/');
+                navigate('/dashboard');
             })
             .catch(err => setErrorMessage(err.response.message));
     }

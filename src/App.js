@@ -4,6 +4,8 @@ import { Toaster } from 'react-hot-toast';
 import './App.css';
 
 import { AuthContext } from './context/auth.context';
+import IsPrivate from './components/routesProtection/IsPrivate';
+import IsAnonymous from './components/routesProtection/IsAnonymous'
 
 import NavBar from './components/NavBar';
 import NavBarLoggedIn from './components/NavBarLoggedIn';
@@ -44,25 +46,23 @@ function App() {
 
           <div className={isLoggedIn ? "col p-5" : "col"} style={mainStyle}>
             <Routes>
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/login" element={<Login />} />
-              {!isLoggedIn ?
-                <Route path="/" element={<HomePage />} />
-                :
-                <Route path="/" element={<Dashboard />} />
-              }
-              <Route path="/dressing" element={<Dressing />} />
-              <Route path="/dressing/item/add" element={<AddItem />} />
-              <Route path="/dressing/item/edit/:itemId" element={<EditItem />} />
+              <Route path="/signup" element={<IsAnonymous><Signup /></IsAnonymous>} />
+              <Route path="/login" element={<IsAnonymous><Login /></IsAnonymous>} />
+              <Route path="/" element={<IsAnonymous><HomePage /></IsAnonymous>} />
 
-              <Route path="/outfits/random" element={<GenerateOutfit />} />
-              <Route path="/outfits/random/view" element={<RandomOutfits />} />
-              <Route path="/outfits/random/view/single" element={<ViewOutfit />} />
-              <Route path="/outfits/view/:outfitId" element={<EditOutfit />} />
-              <Route path="/outfits/saved/" element={<SavedOutfits />} />
+              <Route path="/dashboard" element={<IsPrivate><Dashboard /></IsPrivate>} />
+              <Route path="/dressing" element={<IsPrivate><Dressing /></IsPrivate>} />
+              <Route path="/dressing/item/add" element={<IsPrivate><AddItem /></IsPrivate>} />
+              <Route path="/dressing/item/edit/:itemId" element={<IsPrivate><EditItem /></IsPrivate>} />
 
-              <Route path="/account/" element={<Account />} />
-              <Route path="/subscribe/" element={<SubscriptionPage />} />
+              <Route path="/outfits/random" element={<IsPrivate><GenerateOutfit /></IsPrivate>} />
+              <Route path="/outfits/random/view" element={<IsPrivate><RandomOutfits /></IsPrivate>} />
+              <Route path="/outfits/random/view/single" element={<IsPrivate><ViewOutfit /></IsPrivate>} />
+              <Route path="/outfits/view/:outfitId" element={<IsPrivate><EditOutfit /></IsPrivate>} />
+              <Route path="/outfits/saved/" element={<IsPrivate><SavedOutfits /></IsPrivate>} />
+
+              <Route path="/account/" element={<IsPrivate><Account /></IsPrivate>} />
+              <Route path="/subscribe/" element={<IsPrivate><SubscriptionPage /></IsPrivate>} />
             </Routes>
           </div>
         </div>

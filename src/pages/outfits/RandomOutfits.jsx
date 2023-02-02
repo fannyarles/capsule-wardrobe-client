@@ -1,13 +1,15 @@
 import { Link, useLocation, useParams, useSearchParams } from "react-router-dom";
 import OutfitCard from "../../components/OutfitCard";
 import Loader from "../../components/Loader";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import './outfits.css';
 
 function RandomOutfits() {
 
     const [params] = useSearchParams();
+
+    const storedToken = localStorage.getItem('authToken');
 
     const [itemParams, setItemParams] = useState(null);
     const [items, setItems] = useState(null);
@@ -18,12 +20,13 @@ function RandomOutfits() {
     }, [params]);
 
     useEffect(() => {
-        if (itemParams) {
-            axios.get(`${process.env.REACT_APP_API_URL}/outfits/random/${itemParams.occasion}/${itemParams.category}/${itemParams.piece}`)
+        if (itemParams && storedToken) {
+            axios.get(`${process.env.REACT_APP_API_URL}/outfits/random/${itemParams.occasion}/${itemParams.category}/${itemParams.piece}`, { headers: { "Authorization": `Bearer ${storedToken}` } })
                 .then(response => setItems(response.data))
                 .catch(err => setErrorMessage(err.response.data.message))
         }
-    }, [itemParams]);
+    }, [itemParams, storedToken]);
+
     const saveOutfitIcons = document.querySelectorAll('.save-outfit-icon');
 
     return (<>
