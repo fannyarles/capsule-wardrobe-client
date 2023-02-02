@@ -62,7 +62,7 @@ function Dressing() {
 
     useEffect(() => {
         if (user?.id) {
-            axios.get(`http://localhost:5005/dressing/user/${user.id}`)
+            axios.get(`${process.env.REACT_APP_API_URL}/dressing/user/${user.id}`)
                 .then(response => setDressingByItems(response.data))
                 .catch(err => console.error(err))
         }

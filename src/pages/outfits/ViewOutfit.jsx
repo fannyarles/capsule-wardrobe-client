@@ -25,7 +25,7 @@ function ViewOutfit() {
         if (outfit.type === '1') { savedOutfit = { occasion: occasion, type: outfit.type, footwear: outfit.footwear._id, piece: outfit.piece._id } }
         if (outfit.type === '2') { savedOutfit = { occasion: occasion, type: outfit.type, footwear: outfit.footwear._id, top: outfit.top._id, bottoms: outfit.bottoms._id } }
 
-        axios.post(`http://localhost:5005/outfits/save`, savedOutfit, { headers: { "Authorization": `Bearer ${storedToken}` } })
+        axios.post(`${process.env.REACT_APP_API_URL}/outfits/save`, savedOutfit, { headers: { "Authorization": `Bearer ${storedToken}` } })
             .then(() => {
                 toast.dismiss(loadingToast);
                 toast.success('Outfit successfully saved!');

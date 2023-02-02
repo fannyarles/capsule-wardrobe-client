@@ -33,11 +33,10 @@
 .edit-outfit-icon {
     color: tomato;
     font-size: xx-large;
-    transition: 2s;
+    transition-duration: translate 0s, rotate 1s; 
 }
 
 .edit-outfit-icon:hover {
     transform-origin: center;
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
+    transform: translate(0, 30%) rotate(90deg) ;
 }

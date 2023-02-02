@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from "axios";
 import { AuthContext } from '../context/auth.context';
+import AuthApi from './../services/AuthApi.service'
 
 function Login() {
 
@@ -17,13 +17,13 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, { username, password })
+        AuthApi.login({ username, password })
             .then(response => {
-                storeToken(response.data.authToken);
+                storeToken(response.authToken);
                 authenticateUser();
                 navigate('/');
             })
-            .catch(err => setErrorMessage(err.response.data.message));
+            .catch(err => setErrorMessage(err.response.message));
     }
 
     return (

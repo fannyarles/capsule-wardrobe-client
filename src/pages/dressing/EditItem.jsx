@@ -40,7 +40,7 @@ function EditItem() {
 
         if (itemInfos.category === '' || itemInfos.imageUrl === '' || !itemInfos.occasions.length) { setErrorMessage(`Please, fill all required fields.`); return; }
 
-        axios.put(`http://localhost:5005/dressing/item/${itemId}`, { ...itemInfos, occasions: itemInfos.occasions })
+        axios.put(`${process.env.REACT_APP_API_URL}/dressing/item/${itemId}`, { ...itemInfos, occasions: itemInfos.occasions })
             .then(response => {
                 toast.success(`Item successfully deleted!`);
                 navigate('/dressing')
@@ -52,7 +52,7 @@ function EditItem() {
     const deleteItem = e => {
         e.preventDefault();
 
-        axios.delete(`http://localhost:5005/dressing/item/${itemId}`)
+        axios.delete(`${process.env.REACT_APP_API_URL}/dressing/item/${itemId}`)
             .then(response => setItemInfos(response.data[0]))
             .then(() => {
                 toast.success(`Item successfully deleted!`);
@@ -81,7 +81,7 @@ function EditItem() {
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:5005/dressing/item/${itemId}`)
+        axios.get(`${process.env.REACT_APP_API_URL}/dressing/item/${itemId}`)
             .then(response => {
                 const item = response.data[0];
                 setItemInfos({ itemId: item._id, category: item.category, brand: item.brand, imageUrl: item.imageUrl, occasions: [...item.occasions], ownerId: item.ownerId })

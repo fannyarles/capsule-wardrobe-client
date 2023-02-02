@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import UserApi from './../services/UserApi.services';
 
 function Dashboard() {
 
@@ -31,14 +31,14 @@ function Dashboard() {
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:5005/dressing/items/top5`, { headers: { "Authorization": `Bearer ${storedToken}` } })
-            .then(response => setTopItems(response.data))
+        UserApi.getTop5Items()
+            .then(response => setTopItems(response))
             .catch(err => setErrorMessage(err.reponse.data.message));
     }, [isUserLoading])
 
     useEffect(() => {
-        axios.get(`http://localhost:5005/outfits/cat/top5`, { headers: { "Authorization": `Bearer ${storedToken}` } })
-            .then(response => setTopOutfitCat(response.data))
+        UserApi.getTop5Cats()
+            .then(response => setTopOutfitCat(response))
             .catch(err => setErrorMessage(err.reponse.data.message));
     }, [isUserLoading])
 

@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AuthApi from './../services/AuthApi.service';
 
 function Signup() {
 
@@ -13,7 +13,7 @@ function Signup() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, { username, email, password })
+        AuthApi.signup({ username, email, password })
             .then(response => navigate('/login'))
             .catch(err => console.log(err));
     }

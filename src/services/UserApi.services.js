@@ -6,20 +6,18 @@ const api = axios.create({
     // withCredentials: true // => you might need this option if using cookies and sessions
 });
 
-const signup = ({ username, email, password }) => {
-    return api.post(`/auth/signup`, { username, email, password })
+const storedToken = localStorage.getItem('authToken');
+
+const getTop5Items = () => {
+
+    return api.get(`/dressing/items/top5`, { headers: { "Authorization": `Bearer ${storedToken}` } })
         .then(response => response.data)
         .catch(err => console.error(err))
 }
 
-const login = ({ username, password }) => {
-    return api.post(`/auth/login`, { username, password })
-        .then(response => response.data)
-        .catch(err => console.error(err))
-}
+const getTop5Cats = () => {
 
-const verifyToken = (storedToken) => {
-    return api.get("/auth/verify", { headers: { Authorization: `Bearer ${storedToken}` } })
+    return api.get(`/outfits/cat/top5`, { headers: { "Authorization": `Bearer ${storedToken}` } })
         .then(response => response.data)
         .catch(err => console.error(err))
 }
@@ -34,12 +32,11 @@ const verifyToken = (storedToken) => {
 //     return api.put("/api/users", {username, campus, course, image})
 // }
 
-const authMethods = {
-    signup,
-    login,
-    verifyToken,
+const userMethods = {
+    getTop5Items,
+    getTop5Cats
     // uploadPhoto,
     // editUser
 }
 
-export default authMethods;
+export default userMethods;

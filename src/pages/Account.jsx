@@ -22,7 +22,7 @@ function Account() {
 
         if (userInfos.email === '') { setErrorMessage(`Please, fill all required fields.`); return; }
 
-        axios.post(`http://localhost:5005/account/edit/${user.id}`, userInfos, { headers: { "Authorization": `Bearer ${storedToken}` } })
+        axios.updateInfos(`${process.env.REACT_APP_API_URL}/account/edit/${user.id}`, userInfos, { headers: { "Authorization": `Bearer ${storedToken}` } })
             .then(response => {
                 toast.success('Account updated!');
                 navigate('/');
@@ -36,7 +36,7 @@ function Account() {
         const uploadData = new FormData();
         uploadData.append("avatar", e.target.files[0]);
 
-        const response = await axios.post(`http://localhost:5005/account/upload`, uploadData, { headers: { "Authorization": `Bearer ${storedToken}` } })
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/account/upload`, uploadData, { headers: { "Authorization": `Bearer ${storedToken}` } })
             .catch(err => toast.error("Error while uploading the file."));
 
         const fileUrl = response.data.fileUrl;
@@ -48,7 +48,7 @@ function Account() {
 
     useEffect(() => {
         if (user) {
-            axios.get(`http://localhost:5005/account/${user.id}`, { headers: { "Authorization": `Bearer ${storedToken}` } })
+            axios.get(`${process.env.REACT_APP_API_URL}/account/${user.id}`, { headers: { "Authorization": `Bearer ${storedToken}` } })
                 .then(response => {
                     if (!response.data.avatarUrl || response.data.avatarUrl === '') response.data.avatarUrl = defaultAvatar;
                     setUserInfos(response.data)

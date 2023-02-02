@@ -19,7 +19,7 @@ function RandomOutfits() {
 
     useEffect(() => {
         if (itemParams) {
-            axios.get(`http://localhost:5005/outfits/random/${itemParams.occasion}/${itemParams.category}/${itemParams.piece}`)
+            axios.get(`${process.env.REACT_APP_API_URL}/outfits/random/${itemParams.occasion}/${itemParams.category}/${itemParams.piece}`)
                 .then(response => setItems(response.data))
                 .catch(err => setErrorMessage(err.response.data.message))
         }

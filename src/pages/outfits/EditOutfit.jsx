@@ -22,7 +22,7 @@ function ViewOutfit() {
         if (outfit.type === '1') { savedOutfit = { occasion: outfit.occasion, type: outfit.type, footwear: outfit.footwear._id, piece: outfit.piece._id } }
         if (outfit.type === '2') { savedOutfit = { occasion: outfit.occasion, type: outfit.type, footwear: outfit.footwear._id, top: outfit.top._id, bottoms: outfit.bottoms._id } }
 
-        axios.put(`http://localhost:5005/outfits/save/${outfit._id}`, savedOutfit, { headers: { "Authorization": `Bearer ${storedToken}` } })
+        axios.put(`${process.env.REACT_APP_API_URL}/outfits/save/${outfit._id}`, savedOutfit, { headers: { "Authorization": `Bearer ${storedToken}` } })
             .then(() => {
                 navigate('/outfits/saved');
                 toast.success(`Outfit successfully saved!`)
@@ -31,13 +31,13 @@ function ViewOutfit() {
     }
 
     const handleDelete = () => {
-        axios.delete(`http://localhost:5005/outfits/delete/${outfit._id}`, { headers: { "Authorization": `Bearer ${storedToken}` } })
+        axios.delete(`${process.env.REACT_APP_API_URL}/outfits/delete/${outfit._id}`, { headers: { "Authorization": `Bearer ${storedToken}` } })
             .then(() => navigate('/outfits/saved'))
             .catch(err => setErrorMessage(err.response.data.message));
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:5005/outfits/view/${outfitId}`, { headers: { "Authorization": `Bearer ${storedToken}` } })
+        axios.get(`${process.env.REACT_APP_API_URL}/outfits/view/${outfitId}`, { headers: { "Authorization": `Bearer ${storedToken}` } })
             .then(response => setOutfit(response.data))
             .catch(err => setErrorMessage(err.response.data.message))
     }, [outfitId, storedToken])

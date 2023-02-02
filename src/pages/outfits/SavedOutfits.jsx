@@ -12,7 +12,7 @@ function SavedOutfits() {
     const [errorMessage, setErrorMessage] = useState(null);
 
     useEffect(() => {
-        axios.get(`http://localhost:5005/outfits/saved`, { headers: { "Authorization": `Bearer ${storedToken}` } })
+        axios.get(`${process.env.REACT_APP_API_URL}/outfits/saved`, { headers: { "Authorization": `Bearer ${storedToken}` } })
             .then(response => setOutfits(response.data))
             .catch(err => setErrorMessage(err.response.data.message));
     }, []);
