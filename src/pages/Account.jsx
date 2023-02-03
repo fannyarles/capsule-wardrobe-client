@@ -22,7 +22,7 @@ function Account() {
 
         if (userInfos.email === '') { setErrorMessage(`Please, fill all required fields.`); return; }
 
-        axios.updateInfos(`${process.env.REACT_APP_API_URL}/account/edit/${user.id}`, userInfos, { headers: { "Authorization": `Bearer ${storedToken}` } })
+        axios.post(`${process.env.REACT_APP_API_URL}/account/edit/${user.id}`, userInfos, { headers: { "Authorization": `Bearer ${storedToken}` } })
             .then(response => {
                 toast.success('Account updated!');
                 navigate('/');
