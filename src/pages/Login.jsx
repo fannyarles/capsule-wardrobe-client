@@ -53,6 +53,8 @@ function Login() {
                             <input type="submit" value="Login" className="btn btn-primary" />
                         </div>
                     </form>
+                    <br />
+                    <p><small>Demo login: Laura | *Bali974</small></p>
 
                 </div>
             </div>
