@@ -52,8 +52,8 @@ function RandomOutfits() {
 
 
                         <div className="row d-flex flex-wrap">
-                            {items?.outfits && items.outfits.map(outfit => {
-                                return <>
+                            {items.outfits.map(outfit => {
+                                return outfit && <>
                                     <div className="col d-flex col-12 col-xl-4 col-lg-6 col-md-12 col-xs-12 col-xxs-12">
                                         <div className="card save-outfit-card">
                                             <Link to='/outfits/random/view/single' state={{ occasion: items.occasion, selectedOutfit: outfit }}>
