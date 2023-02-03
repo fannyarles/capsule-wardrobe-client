@@ -94,13 +94,13 @@ function Account() {
                                 <label htmlFor="avatar">Profile picture</label><br />
                                 <input type="file" id="avatar" name="avatar" onChange={e => handleUpload(e)} /><br /><br />
                             </div>
-                            <div>
-                                {errorMessage && <p>{errorMessage}</p>}
-                                <button className="btn btn-primary btn-lg mt-3" type="button" disabled={isUploading} onClick={handleSubmit}>
-                                    {isUploading ? <><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...</>
-                                        : <>Update account</>}
-                                </button>
-                            </div>
+                        </div>
+                        <div>
+                            {errorMessage && <p>{errorMessage}</p>}
+                            <button className="btn btn-primary btn-lg mt-2" type="button" disabled={isUploading} onClick={handleSubmit}>
+                                {isUploading ? <><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...</>
+                                    : <>Update account</>}
+                            </button>
                         </div>
 
                     </div>
