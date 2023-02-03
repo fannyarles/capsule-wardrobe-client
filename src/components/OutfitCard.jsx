@@ -9,10 +9,10 @@ function OutfitCard(props) {
                     <>
                         <div className="row d-flex justify-content-center">
                             <div className="col col-7 d-flex flex-column justify-content-center">
-                                <img src={outfit.piece.imageUrl} alt="item" width="100%" data-item-type={outfit.piece.type} className="outfit-card-item" />
+                                <img src={outfit.piece && outfit.piece.imageUrl} alt="item" width="100%" data-item-type={outfit.piece.type} className="outfit-card-item" />
                             </div>
                             <div className="col col-5 d-flex flex-column justify-content-center">
-                                <img src={outfit.footwear.imageUrl} alt="item" width="100%" data-item-type={outfit.footwear.type} className="outfit-card-item" />
+                                <img src={outfit.footwear && outfit.footwear.imageUrl} alt="item" width="100%" data-item-type={outfit.footwear.type} className="outfit-card-item" />
                             </div>
                         </div>
                     </>
@@ -21,11 +21,11 @@ function OutfitCard(props) {
                     <>
                         <div className="row d-flex justify-content-center">
                             <div className="col col-5 d-flex flex-column justify-content-center">
-                                <img src={outfit.top.imageUrl} alt="item" width="100%" data-item-type={outfit.top.type} className="outfit-card-item" /><br />
-                                <img src={outfit.footwear.imageUrl} alt="item" width="100%" data-item-type={outfit.footwear.type} className="outfit-card-item" />
+                                <img src={outfit.top && outfit.top.imageUrl} alt="item" width="100%" data-item-type={outfit.top.type} className="outfit-card-item" /><br />
+                                <img src={outfit.footwear && outfit.footwear.imageUrl} alt="item" width="100%" data-item-type={outfit.footwear.type} className="outfit-card-item" />
                             </div>
                             <div className="col col-7 d-flex flex-column justify-content-center">
-                                <img src={outfit.bottoms.imageUrl} alt="item" width="100%" data-item-type={outfit.bottoms.type} className="outfit-card-item" />
+                                <img src={outfit.bottoms && outfit.bottoms.imageUrl} alt="item" width="100%" data-item-type={outfit.bottoms.type} className="outfit-card-item" />
                             </div>
                         </div>
                     </>
