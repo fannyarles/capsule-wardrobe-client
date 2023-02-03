@@ -63,6 +63,7 @@ function App() {
               <Route path="/account" element={<IsPrivate><Account /></IsPrivate>} />
               <Route path="/subscribe" element={<IsPrivate><SubscriptionPage /></IsPrivate>} />
 
+              <Route path="/error-404" element={<Error404 />} />
               <Route path="/*" element={<Error404 />} />
             </Routes>
           </div>
