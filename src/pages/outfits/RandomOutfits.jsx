@@ -55,15 +55,15 @@ function RandomOutfits() {
                         <div className="row d-flex flex-wrap">
                             {items.outfits.map(outfit => {
                                 return <>
-                                    <div className="col col-4 d-flex align-content-stretch">
-                                        <div className="card">
-                                            <div className="save-outfit-button">
-                                                <Link to='/outfits/random/view/single' state={{ occasion: items.occasion, selectedOutfit: outfit }} className="save-outfit-icon">
+                                    <div className="col d-flex col-12 col-xl-4 col-lg-6 col-md-12 col-xs-12 col-xxs-12">
+                                        <div className="card save-outfit-card">
+                                            <Link to='/outfits/random/view/single' state={{ occasion: items.occasion, selectedOutfit: outfit }}>
+                                                <div className="save-outfit-icon">
                                                     <i class="bi bi-heart"></i>
                                                     <i class="bi bi-heart-fill"></i>
-                                                </Link>
-                                            </div>
-                                            <OutfitCard occasion={items.occasion} outfit={outfit} type={outfit.type} />
+                                                </div>
+                                                <OutfitCard occasion={items.occasion} outfit={outfit} type={outfit.type} />
+                                            </Link>
                                         </div>
                                     </div>
                                 </>

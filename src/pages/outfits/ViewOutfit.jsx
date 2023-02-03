@@ -53,19 +53,27 @@ function ViewOutfit() {
                 <Loader />
                 :
                 <>
-                    <div className="row d-flex text-start align-items-start justify-content-start my-3">
-                        <div className="col-4 d-flex flex-column justify-content-between">
-                            <div>
-                                <h1>View outfit</h1>
-                                <p className="occasions-tags">{occasion}</p>
-                                <SwitchSection occasion={occasion} outfit={outfit} setOutfit={setOutfit} />
-                            </div>
-                            <div className="mt-5">
-                                {errorMessage && <p>{errorMessage}</p>}
-                                <button className="btn btn-primary btn-lg" onClick={handleSave}>Save Outfit</button>
+                    <div className="row text-start">
+                        <div className="col col-12">
+                            <h1>View outfit</h1>
+                            <p className="occasions-tags">{occasion}</p>
+                        </div>
+                    </div>
+                    <div className="row d-flex flex-column-reverse flex-xxl-row flex-xl-row flex-lg-column-reverse flex-md-column-reverse flex-sm-column-reverse flex-xs-column-reverse flex-xxs-column-reverse text-start justify-content-center">
+                        <div className="col col-xl-4 d-flex flex-column justify-content-between">
+                            <div className="row mb-3">
+                                <div className="col-12">
+                                    <SwitchSection occasion={occasion} outfit={outfit} setOutfit={setOutfit} />
+                                </div>
+                                <div className="row mb-3 text-start mt-4">
+                                    <div className="col-12">
+                                        {errorMessage && <p>{errorMessage}</p>}
+                                        <button className="btn btn-primary btn-lg mt-3" onClick={handleSave}>Save Outfit</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="col-8">
+                        <div className="col col-xl-8 outfit-preview">
                             <OutfitCard outfit={outfit} type={outfit.type} />
                         </div>
                     </div>

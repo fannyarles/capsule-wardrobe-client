@@ -1,3 +1,23 @@
+.save-outfit-card .bi-heart {
+    display: initial;
+}
+
+.save-outfit-card .bi-heart-fill {
+    display: none;
+}
+
+.save-outfit-card:hover .bi-heart {
+    display: none;
+}
+
+.save-outfit-card:hover .bi-heart-fill {
+    display: initial;
+}
+
+.save-outfit-card:hover .outfit-card {
+    transform: scale(1.1);
+}
+
 .save-outfit-icon {
     position: absolute;
     z-index: 2;
@@ -6,18 +26,6 @@
 .save-outfit-icon {
     color: tomato;
     font-size: xx-large;
-}
-
-.save-outfit-icon .bi-heart-fill {
-    display: none;
-}
-
-.save-outfit-icon:hover .bi-heart-fill {
-    display: initial;
-}
-
-.save-outfit-icon:hover .bi-heart {
-    display: none;
 }
 
 .save-outfit-icon i:hover {
@@ -25,18 +33,18 @@
     font-size: xx-large;
 }
 
-.card-actions {
-    position: absolute;
-    z-index: 2;
-}
-
 .edit-outfit-icon {
-    color: tomato;
     font-size: xx-large;
-    transition-duration: translate 0s, rotate 1s; 
+    transition: all 2s; 
+    transform-origin: center center!important;
+    transform-style: preserve-3d;
 }
 
 .edit-outfit-icon:hover {
-    transform-origin: center;
-    transform: translate(0, 30%) rotate(90deg) ;
+    transform-style: preserve-3d;
+    transform: rotate(360deg) ;
+}
+
+.edit-outfit-icon {
+    line-height: 10px!important;
 }

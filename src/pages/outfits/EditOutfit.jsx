@@ -43,33 +43,35 @@ function ViewOutfit() {
     }, [outfitId, storedToken])
 
     return (
-        <div id="view-outfit-page" className="d-flex flex-column justify-content-between" style={{ minHeight: "90vh" }}>
+        <div id="view-outfit-page" className="d-flex flex-column" style={{ minHeight: "90vh" }}>
             {!outfit ?
                 <Loader />
                 :
                 <>
-                    <div className="row d-flex text-start justify-content-center">
-                        <div className="col-4 d-flex flex-column justify-content-between">
+                    <div className="row text-start">
+                        <div className="col col-12">
+                            <h1>Edit Outfit</h1>
+                            <p className="text-muted fst-italic"><small>Saved on {outfit.createdAt.split('T')[0]}</small></p>
+                            <p className="occasions-tags">{outfit.occasion}</p>
+                        </div>
+                    </div>
+                    <div className="row d-flex flex-column-reverse flex-xxl-row flex-xl-row flex-lg-column-reverse flex-md-column-reverse flex-sm-column-reverse flex-xs-column-reverse flex-xxs-column-reverse text-start justify-content-center">
+                        <div className="col col-xl-4 d-flex flex-column justify-content-between">
                             <div className="row mb-3">
                                 <div className="col-12">
-                                    <h1>Edit Outfit</h1>
-                                    <p className="text-muted fst-italic"><small>Saved on {outfit.createdAt.split('T')[0]}</small></p>
-                                    <p className="occasions-tags">{outfit.occasion}</p>
                                     <SwitchSection occasion={outfit.occasion} outfit={outfit} setOutfit={setOutfit} />
                                 </div>
-                                <div className="row mb-3 text-start mt-5">
+                                <div className="row mb-3 text-start mt-4">
                                     <div className="col-12">
                                         {errorMessage && <p>{errorMessage}</p>}
-                                        <button className="btn btn-primary btn-lg mx-2" onClick={handleSave}>Save Outfit</button>
-                                        <button className="btn btn-danger btn-lg mx-2" onClick={handleDelete}>Delete Outfit</button>
+                                        <button className="btn btn-primary btn-lg mx-2 mt-3" onClick={handleSave}>Save Outfit</button>
+                                        <button className="btn btn-danger btn-lg mx-2 mt-3" onClick={handleDelete}>Delete Outfit</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-8">
-                            <div className="outfit-preview">
-                                <OutfitCard outfit={outfit} type={outfit.type} />
-                            </div>
+                        <div className="col col-xl-8 outfit-preview">
+                            <OutfitCard outfit={outfit} type={outfit.type} />
                         </div>
                     </div>
                 </>

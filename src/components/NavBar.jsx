@@ -1,31 +1,33 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import logo from './../assets/logo_C.png'
 
 function NavBar() {
 
     const { isLoggedIn, logoutUser } = useContext(AuthContext);
-    // console.log(isLoggedIn)
 
     return (
-        <div className="container">
-            <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between px-4 py-4">
-                <NavLink to="/" className="d-flex align-items-center col-md-3 mb-md-0 text-dark text-decoration-none">Home</NavLink>
-
-                <ul className="nav col-12 col-md-auto justify-content-center mb-md-0">
-                    <li onClick={() => document.getElementById('banner').scrollIntoView()}><NavLink to='#banner' className="nav-link px-5 link-dark">Home</NavLink></li>
-                    <li onClick={() => document.getElementById('about').scrollIntoView()}><NavLink to='#about' className="nav-link px-5 link-dark">About MinFit</NavLink></li>
-                    <li onClick={() => document.getElementById('features').scrollIntoView()}><NavLink to='#features' className="nav-link px-5 link-dark">Features</NavLink></li>
-                    <li onClick={() => document.getElementById('pricing').scrollIntoView()}><NavLink to='#pricing' className="nav-link px-5 link-dark">Pricing</NavLink></li>
-                    <li onClick={() => document.getElementById('faq').scrollIntoView()}><NavLink to='#faq' className="nav-link px-5 link-dark">FAQ</NavLink></li>
-                </ul>
-
-                <div className="col-md-3 text-end">
-                    <NavLink to='/login' className="btn btn-outline-primary me-3">Login</NavLink>
-                    <NavLink to='/signup' className="btn btn-primary">Signup</NavLink>
+        <header className="px-4 py-4">
+            <div className="row d-flex justify-content-between align-items-center">
+                <div className="col col-xs-6 mobile-menu">
+                    <NavLink to="/" className="d-flex justify-content-start text-dark"><i class="bi bi-list"></i></NavLink>
                 </div>
-            </header>
-        </div>
+                <div className="col col-lg-2 desktop-menu">
+                    <NavLink to="/" className="d-flex justify-content-start"><img src={logo} alt="logo" width="auto" height="35px" /></NavLink>
+                </div>
+                <nav className="col col-xxl-8 col-lg-6 d-flex justify-content-center desktop-menu">
+                    <NavLink to='#about' className="nav-link px-xl-5 px-lg-4 px-md-4 px-sm-4" onClick={() => document.getElementById('about').scrollIntoView()}>About</NavLink>
+                    <NavLink to='#features' className="nav-link px-xl-5 px-lg-4 px-md-4 px-sm-4" onClick={() => document.getElementById('features').scrollIntoView()}>Features</NavLink>
+                    <NavLink to='#pricing' className="nav-link px-xl-5 px-lg-4 px-md-4 px-sm-4" onClick={() => document.getElementById('pricing').scrollIntoView()}>Pricing</NavLink>
+                    <NavLink to='#faq' className="nav-link px-xl-5 px-lg-4 px-md-4 px-sm-4" onClick={() => document.getElementById('faq').scrollIntoView()}>FAQ</NavLink>
+                </nav>
+                <div className="col col-lg-2 col-xs-6 d-flex justify-content-end">
+                    <NavLink to='/login' className="btn btn-outline-secondary me-4">Login</NavLink>
+                    <NavLink to='/signup' className="btn btn-secondary">Signup</NavLink>
+                </div>
+            </div>
+        </header>
     )
 }
 

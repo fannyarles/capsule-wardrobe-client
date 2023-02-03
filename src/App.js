@@ -34,9 +34,6 @@ function App() {
 
   const { isLoggedIn } = useContext(AuthContext);
 
-  let mainStyle = {};
-  if (isLoggedIn) mainStyle = { marginLeft: "280px", minHeight: "100vh" }
-
   return (
     <div className="App">
       <div className="container-fluid">
@@ -44,7 +41,7 @@ function App() {
           <Toaster />
           {!isLoggedIn ? <NavBar /> : <NavBarLoggedIn />}
 
-          <div className={isLoggedIn ? "col p-5" : "col"} style={mainStyle}>
+          <div id={isLoggedIn ? "main" : ""} className={isLoggedIn ? "col p-5" : "col"}>
             <Routes>
               <Route path="/signup" element={<IsAnonymous><Signup /></IsAnonymous>} />
               <Route path="/login" element={<IsAnonymous><Login /></IsAnonymous>} />

@@ -35,11 +35,11 @@ function Login() {
                     <form onSubmit={handleSubmit}>
                         <div class="mb-3">
                             <label htmlFor="username" className="form-label">Username</label>
-                            <input type="text" id="username" name="username" class="form-control" value={username} onChange={e => setUsername(e.target.value)} />
+                            <input type="text" id="username" name="username" class="form-control text-center" value={username} onChange={e => setUsername(e.target.value)} />
                         </div>
                         <div class="mb-5">
                             <label htmlFor="password" className="form-label">Password</label>
-                            <input type="password" id="password" class="form-control" value={password} onChange={e => setPassword(e.target.value)} />
+                            <input type="password" id="password" class="form-control text-center" value={password} onChange={e => setPassword(e.target.value)} />
                         </div>
                         <div class="mb-3 d-grid">
                             <input type="submit" value="Login" className="btn btn-primary" />

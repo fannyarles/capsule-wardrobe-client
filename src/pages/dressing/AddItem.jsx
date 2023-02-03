@@ -102,12 +102,12 @@ function AddItem() {
 
                     <div className="row flex-row justify-content-center">
 
-                        <div className="col col-4">
+                        <div className="col col-12 col-xl-4 col-lg-6 col-md-12">
                             {isUploading && <Loader />}
-                            {!isUploading && <img src={itemInfos.imageUrl === '' ? itemDefault : itemInfos.imageUrl} alt='item-pic' width="100%" />}
+                            {!isUploading && <img src={itemInfos.imageUrl === '' ? itemDefault : itemInfos.imageUrl} alt='item-pic' width="100%" className="mb-5" />}
                         </div>
 
-                        <div className="col col-4 text-start d-flex flex-column justify-content-between">
+                        <div className="col col-12 col-xl-4 col-lg-6 col-md-12 text-start d-flex flex-column justify-content-between">
 
                             <div>
                                 <label htmlFor="category" className="mt-0">Category<span className="required">(Required)</span></label><br />
@@ -120,7 +120,7 @@ function AddItem() {
                                 </select><br /><br />
 
                                 <label htmlFor="occasion">Occasions <span className="required">(Required)</span></label><br />
-                                {occasionsData.map(el => <p data-outfit-occasion={el.value} key={el.value} onClick={selectOccasion} className={itemInfos.occasions.includes(el.value) ? "occasion btn btn-info mx-1" : "occasion btn btn-outline-info mx-1"} >{el.name}</p>)}<br /><br />
+                                {occasionsData.map(el => <p data-outfit-occasion={el.value} key={el.value} onClick={selectOccasion} className={itemInfos.occasions.includes(el.value) ? "occasion btn btn-info mx-1" : "occasion btn btn-outline-info mx-1"} >{el.name}</p>)}<br />
 
                                 <label htmlFor="brand">Brand</label><br />
                                 <input list="brands" id="brand" name="brand" value={itemInfos.brand} onChange={handleInputChange} autoComplete="off" />

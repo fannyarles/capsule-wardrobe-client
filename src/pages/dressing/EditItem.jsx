@@ -145,25 +145,7 @@ function EditItem() {
                                         : <>Edit Item</>}
                                 </button>
 
-                                <button className="btn btn-primary mx-1 btn-lg btn-danger" data-bs-toggle="modal" data-bs-target="#deletionModal" onClick={e => deletionNotice(e)}>Delete item</button>
-
-                                <div class="modal fade" id="deletionModal" tabindex="-1" aria-labelledby="deletionModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="deletionModalLabel">Delete item</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                ...
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary" onClick={e => deleteItem(e)} >Confirm</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <button className="btn btn-primary mx-1 btn-lg btn-danger" onClick={e => deleteItem(e)}>Delete item</button>
 
                             </div>
                         </div>

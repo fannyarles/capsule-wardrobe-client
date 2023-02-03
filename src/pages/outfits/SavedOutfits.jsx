@@ -31,7 +31,7 @@ function SavedOutfits() {
                         </div>
                         <div className="row">
                             <div className="col col-12">
-                                <div className="d-inline-flex flex-wrap">
+                                <div className="d-flex flex-wrap">
 
                                     {!outfits.length &&
                                         <div className="row d-inline-flex">
@@ -42,16 +42,20 @@ function SavedOutfits() {
 
                                     {outfits.map(outfit => {
                                         return (
-                                            <div className="col col-4 d-flex align-content-stretch">
-                                                <div className="card-actions d-flex align-items-baseline">
-                                                    <div className="edit-outfit-icon ms-2">
-                                                        <Link to={`/outfits/view/${outfit._id}`} className="me-3">
-                                                            <i class="bi bi-arrow-repeat"></i>
-                                                        </Link>
+                                            <div className="col d-flex col-12 col-xl-4 col-lg-6 col-md-12 col-xs-12 col-xxs-12">
+                                                <div className="save-outfit-card d-flex align-items-baseline">
+                                                    <div className="card-actions">
+                                                        <div className="edit-outfit-icon me-3">
+                                                            <Link to={`/outfits/view/${outfit._id}`}>
+                                                                <i class="bi bi-arrow-repeat"></i>
+                                                            </Link>
+                                                        </div>
+                                                        <p className="occasions-tags">{outfit.occasion}</p>
                                                     </div>
-                                                    <p className="occasions-tags">{outfit.occasion}</p>
+                                                    <Link to={`/outfits/view/${outfit._id}`}>
+                                                        <OutfitCard key={outfit._id} from="savedOutfits" outfit={outfit} type={outfit.type} />
+                                                    </Link>
                                                 </div>
-                                                <OutfitCard key={outfit._id} from="savedOutfits" outfit={outfit} type={outfit.type} />
                                             </div>);
                                     })}
 

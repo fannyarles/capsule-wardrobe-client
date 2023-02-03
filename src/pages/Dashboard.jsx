@@ -49,16 +49,16 @@ function Dashboard() {
                 <form onSubmit={handleSubmit}>
                     <h1>{!isUserLoading && <>Welcome, {user.username}.</>}</h1>
                     <h5 className="mt-4">{!isUserLoading && <>Jumpstart your day, save brain power:</>}</h5>
-                    <div className="d-flex align-items-baseline mt-4">
+                    <div className="d-flex align-items-baseline mt-4 flex-wrap">
                         <p>I need a</p>
-                        <select id="filter-by" className="py-1 d-inline mx-3" aria-label="Filter by" value={occasion} onChange={e => setOccasion(e.target.value)}>
+                        <select id="filter-by" className="py-2 d-inline mx-3" aria-label="Filter by" value={occasion} onChange={e => setOccasion(e.target.value)}>
                             <option value="casual">casual</option>
                             <option value="formal">formal</option>
                             <option value="business">business</option>
                             <option value="sportswear">sportswear</option>
                         </select>
                         <p>outfit, with</p>
-                        <select id="filter-by" className="py-1 d-inline mx-3" aria-label="Filter by" value={piece} onChange={e => setCatAndPiece(e.target.value)}>
+                        <select id="filter-by" className="py-2 d-inline mx-3" aria-label="Filter by" value={piece} onChange={e => setCatAndPiece(e.target.value)}>
                             <option value="any">any pieces.</option>
                             <option value="Dress">a dress.</option>
                             <option value="Pantsuit">a pantsuit.</option>
@@ -74,7 +74,7 @@ function Dashboard() {
             </div>
         </div>
         <div className="row text-start">
-            <div className="col col-4">
+            <div className="col col-12 col-xxl-4 col-xl-6 mb-4">
                 <div className="card">
                     <h6 className="mb-4">Top 5 used items</h6>
                     {topItems && <>
@@ -105,7 +105,7 @@ function Dashboard() {
                     </>}
                 </div>
             </div>
-            <div className="col col-4">
+            <div className="col col-12 col-xxl-3 col-xl-6">
                 <div className="card ">
                     <h6 className="mb-4">Top outfits categories</h6>
                     {topOutfitCat &&

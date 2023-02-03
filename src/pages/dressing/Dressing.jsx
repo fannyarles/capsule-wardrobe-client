@@ -29,7 +29,7 @@ function Dressing() {
             const catIdx = displayedInfos.findIndex(el => el.name === item.category);
             if (catIdx >= 0) {
                 displayedInfos[catIdx].count++
-                if (displayedInfos[catIdx].images.length < 4) { displayedInfos[catIdx].images.push(item.imageUrl) }
+                if (displayedInfos[catIdx].images.length < 6) { displayedInfos[catIdx].images.push(item.imageUrl) }
             } else {
                 displayedInfos.push({ id: Math.floor(Math.random() * 100), name: item.category, count: 1, images: [item.imageUrl] });
             }
@@ -47,10 +47,10 @@ function Dressing() {
         ];
 
         list.map(item => {
-            if (item.occasions.includes("casual")) { itemsByStyle[0].items.push(item); if (itemsByStyle[0].images.length < 8) itemsByStyle[0].images.push(item.imageUrl); }
-            if (item.occasions.includes("formal")) { itemsByStyle[1].items.push(item); if (itemsByStyle[1].images.length < 8) itemsByStyle[1].images.push(item.imageUrl); }
-            if (item.occasions.includes("business")) { itemsByStyle[2].items.push(item); if (itemsByStyle[2].images.length < 8) itemsByStyle[2].images.push(item.imageUrl); }
-            if (item.occasions.includes("sportswear")) { itemsByStyle[3].items.push(item); if (itemsByStyle[3].images.length < 8) itemsByStyle[3].images.push(item.imageUrl); }
+            if (item.occasions.includes("casual")) { itemsByStyle[0].items.push(item); if (itemsByStyle[0].images.length < 12) itemsByStyle[0].images.push(item.imageUrl); }
+            if (item.occasions.includes("formal")) { itemsByStyle[1].items.push(item); if (itemsByStyle[1].images.length < 12) itemsByStyle[1].images.push(item.imageUrl); }
+            if (item.occasions.includes("business")) { itemsByStyle[2].items.push(item); if (itemsByStyle[2].images.length < 12) itemsByStyle[2].images.push(item.imageUrl); }
+            if (item.occasions.includes("sportswear")) { itemsByStyle[3].items.push(item); if (itemsByStyle[3].images.length < 12) itemsByStyle[3].images.push(item.imageUrl); }
         })
 
         return itemsByStyle;
@@ -102,46 +102,64 @@ function Dressing() {
                 <>
 
                     <div className="col col-12">
-                        <div className="row my-2 align-items-end">
-                            <div className="col col-6 text-start align-self-baseline">
-                                {display === 'item' && <p>{dressingByItems.length} items</p>}
-                                {display === 'category' && <p> categories</p>}
-                                {display === 'style' && <p>{dressingByItems.length} items</p>}
+                        <div className="row my-2 mb-5 align-items-center d-flex flex-column-reverse flex-xl-row flex-lg-column-reverse flex-md-column-reverse flex-sm-column-reverse flex-xs-column-reverse flex-xxs-column-reverse">
+                            <div className="col col-12 col-xxl-5 col-xl-3 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-start align-self-center">
+                                {display === 'item' && <p className="mb-0 pb-0">{dressingByItems.length} items</p>}
+                                {display === 'category' && <p className="mb-0 pb-0"> categories</p>}
+                                {display === 'style' && <p className="mb-0 pb-0">{dressingByItems.length} items</p>}
                             </div>
-                            <div className="col col-1 text-end align-self-baseline">
-                                <label htmlFor="filter-by">Filter by</label>
-                            </div>
-                            <div className="col col-2">
-                                <select id="filter-by" className="form-select py-3" aria-label="Filter by" value={display} onChange={e => setDisplay(e.target.value)}>
-                                    <option value="item">Items</option>
-                                    <option value="category">Categories</option>
-                                    <option value="style">Styles</option>
-                                </select>
-                            </div>
-                            <div className="col col-3">
-                                <div className="input-group">
-                                    <input className="form-control border-end-0 border py-3 ps-4" type="search" placeholder="Search items by category or brand" id=" example-search-input" onChange={filterData} />
-                                    <span className="input-group-append">
-                                        <button className="btn btn-outline-secondary bg-white border-start-0 border-bottom border ms-n5 py-3 px-4" type="button">
-                                            <i className="fa fa-search"></i>
-                                        </button>
-                                    </span>
+                            <div className="col col-12 col-xxl-7 col-xl-9 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-start mb-xl-0 mb-lg-4 mb-md-4 mb-sm-4 mb-xs-4 mb-xxs-4">
+                                <div className="row">
+                                    <div className="col col-12 col-xxl-6 col-xl-6 col-md-6 col-sm-6 col-xs-12 col-xxs-12 d-flex flex-nowrap flex-column flex-xl-row flex-lg-row flex-md-row flex-sm-row flex-xs-column-reverse flex-xxs-column-reverse align-content-baseline mb-3 mb-xs-0 mb-xxl-0 mb-xl-0 mb-lg-0 mb-md-0">
+                                        <label htmlFor="filter-by" className="mt-0 pb-0 pt-1" style={{ minWidth: "100px" }}>Filter by</label>
+                                        <select id="filter-by" className="form-select py-3" aria-label="Filter by" value={display} onChange={e => setDisplay(e.target.value)}>
+                                            <option value="item">Items</option>
+                                            <option value="category">Categories</option>
+                                            <option value="style">Styles</option>
+                                        </select>
+                                    </div>
+                                    <div className="col col-12 col-xxl-6 col-xl-6 col-md-6 col-sm-6 col-xs-12 col-xxs-12  mb-3 mb-xs-0 mb-xxl-0 mb-xl-0 mb-lg-0 mb-md-0">
+                                        <div className="input-group">
+                                            <input className="form-control border-end-0 border py-3 ps-4" type="search" placeholder="Search items by category or brand" id=" example-search-input" onChange={filterData} />
+                                            <span className="input-group-append">
+                                                <button className="btn btn-outline-secondary bg-white border-start-0 border-bottom border ms-n5 py-3 px-4" type="button">
+                                                    <i className="fa fa-search"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div className="col col-12">
-                        <div className="row d-flex flex-wrap">
+                        <div className="row d-flex flex-wrap flex-row">
                             {!filteredData ?
                                 <>
-                                    {display === 'item' && dressingByItems.map(item => <ItemCard key={item._id} item={item} />)}
-                                    {display === 'category' && dressingByCategories.map(cat => <CatCard key={cat.id} cat={cat} />)}
-                                    {display === 'style' && dressingByStyles.map(style => <StyleCard key={style.id} style={style} />)}
+                                    {display === 'item' && dressingByItems.map(item => {
+                                        return <div className="col col-12 col-xxl-4 col-xl-6 col-md-6rt">
+                                            <ItemCard key={item._id} item={item} />
+                                        </div>
+                                    })}
+                                    {display === 'category' && dressingByCategories.map(cat => {
+                                        return <div className="col col-12 col-xxl-3 col-xl-6 col-lg-12 col-md-12 text-start">
+                                            <CatCard key={cat.id} cat={cat} />
+                                        </div>
+                                    })}
+                                    {display === 'style' && dressingByStyles.map(style => {
+                                        return <div className="col col-12 col-xxl-6 col-xl-6 col-lg-12 col-md-12 text-start">
+                                            <StyleCard key={style.id} style={style} />
+                                        </div>
+                                    })}
                                 </>
                                 :
                                 <>
-                                    {filteredData.map(item => <ItemCard key={item._id} item={item} />)}
+                                    {filteredData.map(item => {
+                                        return <div className="col col-12 col-xxl-4 col-xl-6 col-md-6 text-start">
+                                            <ItemCard key={item._id} item={item} />
+                                        </div>
+                                    })}
                                     {!filteredData.length && <p className="mt-5 text-muted text-start">No results match this search.</p>}
                                 </>
                             }

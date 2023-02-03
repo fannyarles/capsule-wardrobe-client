@@ -73,20 +73,20 @@ function Account() {
 
                     <div className="row d-flex text-start justify-content-start">
 
-                        <div className="col col-3">
+                        <div className="col col-12 col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4">
                             <div style={{
                                 height: "250px",
-                                width: "90%",
+                                width: "auto",
                                 backgroundImage: `url("${userInfos.avatarUrl}")`,
                                 backgroundRepeat: "no-repeat",
-                                backgroundSize: "cover",
-                                backgroundPosition: "center center",
+                                backgroundSize: "contain",
+                                backgroundPosition: "top left",
                                 paddingTop: "90%"
                             }}></div>
                             {/* <img src={userInfos.avatarUrl === undefined ? defaultAvatar : userInfos.avatarUrl} alt="avatar" width={"100%"} /> */}
                         </div>
 
-                        <div className="col col-4 d-flex flex-column align-content-start justify-content-between">
+                        <div className="col col-12 col-xl-9 col-lg-8 col-md-12 d-flex flex-column align-content-start justify-content-between">
                             <div>
                                 <label htmlFor="email" className="mt-0 pt-0">Email<span className="required">(Required)</span></label><br />
                                 <input type="email" name="email" id="email" value={userInfos.email} onChange={e => setUserInfos({ ...userInfos, email: e.target.value })} /><br /><br />
