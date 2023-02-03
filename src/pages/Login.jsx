@@ -54,7 +54,7 @@ function Login() {
                         </div>
                     </form>
                     <br />
-                    <p><small>Demo login: Laura | *Bali974</small></p>
+                    <p><small>Demo login: Laura | Bali974</small></p>
 
                 </div>
             </div>
