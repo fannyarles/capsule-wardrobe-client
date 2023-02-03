@@ -14,7 +14,7 @@ function AddItem() {
 
     const { isUserLoading, user } = useContext(AuthContext);
 
-    const [itemInfos, setItemInfos] = useState({ category: '', brand: '', occasions: [], imageUrl: '', ownerId: null });
+    const [itemInfos, setItemInfos] = useState({ category: 'T-shirt', brand: '', occasions: [], imageUrl: '', ownerId: null });
     const [isUploading, setIsUploading] = useState(false)
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -133,7 +133,7 @@ function AddItem() {
                             </div>
 
                             <div className="col col-12 mt-5">
-                                {errorMessage && <><p class="alert alert-danger d-inline-flex" role="alert">{errorMessage}</p><br /></>}
+                                {errorMessage && <><p class="error-message" role="alert">{errorMessage}</p><br /></>}
                                 <button className="btn btn-primary btn-lg mx-1" type="button" disabled={isUploading} onClick={handleSubmit}>
                                     {isUploading ? <><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...</>
                                         : <>Add Item</>}
