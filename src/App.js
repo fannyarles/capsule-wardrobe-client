@@ -7,6 +7,8 @@ import { AuthContext } from './context/auth.context';
 import IsPrivate from './components/routesProtection/IsPrivate';
 import IsAnonymous from './components/routesProtection/IsAnonymous'
 
+import Error404 from './pages/Error404'
+
 import NavBar from './components/NavBar';
 import NavBarLoggedIn from './components/NavBarLoggedIn';
 import HomePage from './pages/HomePage';
@@ -56,10 +58,12 @@ function App() {
               <Route path="/outfits/random/view" element={<IsPrivate><RandomOutfits /></IsPrivate>} />
               <Route path="/outfits/random/view/single" element={<IsPrivate><ViewOutfit /></IsPrivate>} />
               <Route path="/outfits/view/:outfitId" element={<IsPrivate><EditOutfit /></IsPrivate>} />
-              <Route path="/outfits/saved/" element={<IsPrivate><SavedOutfits /></IsPrivate>} />
+              <Route path="/outfits/saved" element={<IsPrivate><SavedOutfits /></IsPrivate>} />
 
-              <Route path="/account/" element={<IsPrivate><Account /></IsPrivate>} />
-              <Route path="/subscribe/" element={<IsPrivate><SubscriptionPage /></IsPrivate>} />
+              <Route path="/account" element={<IsPrivate><Account /></IsPrivate>} />
+              <Route path="/subscribe" element={<IsPrivate><SubscriptionPage /></IsPrivate>} />
+
+              <Route path="/*" element={<Error404 />} />
             </Routes>
           </div>
         </div>
