@@ -130,11 +130,10 @@ function AddItem() {
 
                                 <label htmlFor="picture">Picture <span className="required">(Required)</span></label><br />
                                 <input name="picture" type="file" onChange={handleUpload} placeholder="Brand" />
-                            </div>
 
-                            <div className="col col-12 mt-5">
-                                {errorMessage && <><p class="error-message" role="alert">{errorMessage}</p><br /></>}
-                                <button className="btn btn-primary btn-lg mx-1" type="button" disabled={isUploading} onClick={handleSubmit}>
+                                {errorMessage && <><p class="error-message mt-5" role="alert">{errorMessage}</p><br /></>}
+
+                                <button className="btn btn-primary btn-lg mx-1 mt-5" type="button" disabled={isUploading} onClick={handleSubmit}>
                                     {isUploading ? <><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...</>
                                         : <>Add Item</>}
                                 </button>
