@@ -9,12 +9,11 @@ function SavedOutfits() {
     const storedToken = localStorage.getItem('authToken');
 
     const [outfits, setOutfits] = useState(null);
-    const [errorMessage, setErrorMessage] = useState(null);
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_API_URL}/outfits/saved`, { headers: { "Authorization": `Bearer ${storedToken}` } })
             .then(response => setOutfits(response.data))
-            .catch(err => setErrorMessage(err.response.data.message));
+            .catch(err => console.log(err.response.data.message));
     }, []);
 
 

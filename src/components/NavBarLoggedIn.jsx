@@ -1,23 +1,25 @@
-import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import defaultAvatar from './../assets/avatar-default.jpg';
 import logo from './../assets/logo_C.png'
 
 function NavBar() {
 
-    const { isLoggedIn, user, logoutUser } = useContext(AuthContext);
+    const { user, logoutUser } = useContext(AuthContext);
+    const [mobileNavOpen, setMobileBarOpen] = useState(false);
+    const location = useLocation();
 
     const showMenu = e => {
-        if (e.currentTarget.parentNode.classList.contains('open')) {
-            e.currentTarget.parentNode.classList.toggle('open');
-        } else {
-            e.currentTarget.parentNode.classList.toggle('open');
-        }
+        setMobileBarOpen(!mobileNavOpen)
     }
 
+    useEffect(() => {
+        setMobileBarOpen(false);
+    }, [location]);
+
     return (<>
-        <div id="sidebar">
+        <div id="sidebar" className={mobileNavOpen && "open"}>
             <div className="sidebar-mobile flex-shrink-0 p-5 d-flex flex-column justify-content-between" onClick={(e) => { showMenu(e) }}>
                 <div className="row">
                     <div className="col col-12">

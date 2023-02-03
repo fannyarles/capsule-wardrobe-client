@@ -7,8 +7,17 @@ function SwitchSection(props) {
     const { occasion, outfit, setOutfit } = props;
     const [errorMessage, setErrorMessage] = useState(null);
 
-    console.log(outfit)
     const storedToken = localStorage.getItem('authToken');
+
+    const focusOn = (element) => {
+        const imgEl = document.querySelector(`img[data-item-type="${element}"]`);
+        if (imgEl) imgEl.style.transform = 'scale(1.1)'
+    }
+
+    const focusOff = (element) => {
+        const imgEl = document.querySelector(`img[data-item-type="${element}"]`);
+        if (imgEl) imgEl.style.transform = 'scale(1)'
+    }
 
     const switchItem = (itemType, currentItemId) => {
         const loadingToast = toast.loading('Waiting...');
@@ -50,7 +59,7 @@ function SwitchSection(props) {
         {
             outfit.type === "1" &&
             <>
-                <div className="card border p-4 mb-4 mt-3">
+                <div className="card border p-4 mb-4 mt-3" onMouseOver={() => focusOn(outfit.piece.type)} onMouseOut={() => focusOff(outfit.piece.type)}>
                     <div className="row d-flex align-items-center">
                         <div className="col col-12 d-flex flex-md-row flex-sm-column justify-content-between align-items-baseline">
                             <h6 className="me-4">{outfit.piece.category} from {outfit.piece.brand}</h6>
@@ -58,7 +67,7 @@ function SwitchSection(props) {
                         </div>
                     </div>
                 </div>
-                <div className="card border p-4">
+                <div className="card border p-4" onMouseOver={() => focusOn(outfit.footwear.type)} onMouseOut={() => focusOff(outfit.footwear.type)}>
                     <div className="row d-flex align-items-center">
                         <div className="col col-12 d-flex flex-md-row flex-sm-column justify-content-between align-items-baseline">
                             <h6 className="me-4">{outfit.footwear.category} from {outfit.footwear.brand}</h6>
@@ -71,7 +80,7 @@ function SwitchSection(props) {
         {
             outfit.type === "2" &&
             <>
-                <div className="card border p-4 mb-4 mt-3">
+                <div className="card border p-4 mb-4 mt-3" onMouseOver={() => focusOn(outfit.top.type)} onMouseOut={() => focusOff(outfit.top.type)}>
                     <div className="row d-flex align-items-center">
                         <div className="col col-12 d-flex flex-md-row flex-sm-column justify-content-between align-items-baseline">
                             <h6 className="me-4">{outfit.top.category} from {outfit.top.brand}</h6>
@@ -79,7 +88,7 @@ function SwitchSection(props) {
                         </div>
                     </div>
                 </div>
-                <div className="card border p-4 mb-4">
+                <div className="card border p-4 mb-4" onMouseOver={() => focusOn(outfit.bottoms.type)} onMouseOut={() => focusOff(outfit.bottoms.type)}>
                     <div className="row d-flex align-items-center">
                         <div className="col col-12 d-flex flex-md-row flex-sm-column justify-content-between align-items-baseline">
                             <h6 className="me-4">{outfit.bottoms.category} from {outfit.bottoms.brand}</h6>
@@ -87,7 +96,7 @@ function SwitchSection(props) {
                         </div>
                     </div>
                 </div>
-                <div className="card border p-4">
+                <div className="card border p-4" onMouseOver={() => focusOn(outfit.footwear.type)} onMouseOut={() => focusOff(outfit.footwear.type)}>
                     <div className="row d-flex align-items-center">
                         <div className="col col-12 d-flex flex-md-row flex-sm-column justify-content-between align-items-baseline">
                             <h6 className="me-4">{outfit.footwear.category} from {outfit.footwear.brand}</h6>

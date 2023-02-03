@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/auth.context";
 import './stripe.css';
-import { PaymentElement, LinkAuthenticationElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 function CheckoutForm() {
 
@@ -87,10 +87,6 @@ function CheckoutForm() {
 
     return (<>
         <form id="payment-form" className="stripe-form" onSubmit={handleSubmit}>
-            {/* <LinkAuthenticationElement
-                id="link-authentication-element"
-                onChange={(e) => setEmail(e.target.value)}
-            /> */}
             <PaymentElement id="payment-element" options={paymentElementOptions} />
             <button className="btn-stripe" disabled={isLoading || !stripe || !elements} id="submit">
                 <span id="button-text">

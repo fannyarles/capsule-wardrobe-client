@@ -8,16 +8,16 @@ const api = axios.create({
     // withCredentials: true // => you might need this option if using cookies and sessions
 });
 
-const getTop5Items = () => {
+const getTop5Items = (userId) => {
 
-    return api.get(`/dressing/items/top5`, { headers: { "Authorization": `Bearer ${storedToken}` } })
+    return api.get(`/dressing/items/top5/${userId}`, { headers: { "Authorization": `Bearer ${storedToken}` } })
         .then(response => response.data)
         .catch(err => console.error(err))
 }
 
-const getTop5Cats = () => {
+const getTop5Cats = (userId) => {
 
-    return api.get(`/outfits/cat/top5`, { headers: { "Authorization": `Bearer ${storedToken}` } })
+    return api.get(`/outfits/cat/top5/${userId}`, { headers: { "Authorization": `Bearer ${storedToken}` } })
         .then(response => response.data)
         .catch(err => console.error(err))
 }

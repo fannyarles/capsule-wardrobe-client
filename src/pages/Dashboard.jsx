@@ -6,6 +6,7 @@ import UserApi from './../services/UserApi.services';
 function Dashboard() {
 
     const { isUserLoading, isLoggedIn, user } = useContext(AuthContext);
+    const [userToken, setUserToken] = useState(null)
 
     const storedToken = localStorage.getItem('authToken');
     const navigate = useNavigate();
@@ -17,8 +18,6 @@ function Dashboard() {
     const [category, setCategory] = useState('any');
     const [piece, setPiece] = useState('any');
 
-    const [errorMessage, setErrorMessage] = useState(null);
-
     const setCatAndPiece = value => {
         if (value === 'any') { setCategory('any'); setPiece(value); }
         if (value === 'Dress' || value === 'Pantsuit') { setCategory('1'); setPiece(value); }
@@ -28,20 +27,18 @@ function Dashboard() {
         e.preventDefault();
         navigate(`/outfits/random/view/?occasion=${occasion}&cat=${category}&piece=${piece}`)
     }
-    if (topOutfitCat) console.log(topOutfitCat)
 
     useEffect(() => {
-        UserApi.getTop5Items()
+        UserApi.getTop5Items(user.id)
             .then(response => setTopItems(response))
-            .catch(err => setErrorMessage(err.reponse.data.message));
-    }, [isUserLoading])
+            .catch(err => console.log(err.reponse.data));
+    }, [user])
 
     useEffect(() => {
-        UserApi.getTop5Cats()
+        UserApi.getTop5Cats(user.id)
             .then(response => setTopOutfitCat(response))
-            .catch(err => setErrorMessage(err.reponse.data.message));
-        if (topOutfitCat) console.logt(topOutfitCat)
-    }, [isUserLoading])
+            .catch(err => console.log(err.reponse.data));
+    }, [user])
 
     return <>
         <div className="row text-start">

@@ -10,19 +10,16 @@ const api = axios.create({
 const addItem = ({ category, brand, occasions, imageUrl, ownerId }) => {
     return api.post("/dressing/item/add", { category, brand, occasions, imageUrl, ownerId }, { headers: { "Authorization": `Bearer ${storedToken}` } })
         .then(response => response.data)
-        .catch(err => console.error(err))
 }
 
 const uploadPhoto = (uploadData) => {
     return api.post("/dressing/item/uploadPic", uploadData, { headers: { "Authorization": `Bearer ${storedToken}` } })
         .then(response => response.data)
-        .catch(err => console.error(err))
 }
 
 const getDressing = (ownerId) => {
     return api.get("/dressing", { ownerId }, { headers: { "Authorization": `Bearer ${storedToken}` } })
         .then(response => response.data)
-        .catch(err => console.error(err))
 }
 
 const authMethods = {

@@ -9,19 +9,16 @@ const api = axios.create({
 const signup = ({ username, email, password }) => {
     return api.post(`/auth/signup`, { username, email, password })
         .then(response => response.data)
-        .catch(err => console.error(err))
 }
 
 const login = ({ username, password }) => {
     return api.post(`/auth/login`, { username, password })
         .then(response => response.data)
-        .catch(err => console.error(err))
 }
 
 const verifyToken = (storedToken) => {
     return api.get("/auth/verify", { headers: { Authorization: `Bearer ${storedToken}` } })
         .then(response => response.data)
-        .catch(err => console.error(err))
 }
 
 // const uploadPhoto = (uploadData) => {

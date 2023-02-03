@@ -16,6 +16,10 @@ h1 {
   font-weight: light!important;
 }
 
+header {
+  position: absolute;
+}
+
 /*** NAVBAR ***/
 
 .navbar-avatar {
@@ -36,11 +40,11 @@ h1 {
 
 #banner {
   background-image: url('./assets/main-banner.jpg');
-  background-position: center center;
+  background-position: top center;
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 75vh;
-  color: white;
+  /* color: white; */
 }
 
 #features .sep {
@@ -122,15 +126,15 @@ a.personal-shopper:hover {
 .bg-primary { background-color: #cbdbcd!important; }
 .border-primary { border-color: #cbdbcd!important; }
 
-#banner .btn {
+/* #banner .btn {
   color: white;
   border-color: white
-}
+} */
 
 #banner .btn:hover {
-  background-color: transparent!important;
+  /* background-color: transparent!important; */
   color: white!important;
-  border-color: white!important;
+  /* border-color: white!important; */
 }
 
 .btn {
@@ -192,7 +196,7 @@ a.personal-shopper:hover {
   background-color: tomato;
   border: 1px solid tomato;
   border: 0;
-  transition: all ease-in .5s;
+  transition: all ease-in .2s;
 }
 
 .btn-info {
@@ -255,6 +259,10 @@ a.personal-shopper:hover {
 .bg-info {
   background-color: #f1e8ca!important;
   color: #333;
+}
+
+.error-message {
+  color: tomato;
 }
 
 /*** FOOTER ***/
@@ -403,6 +411,9 @@ input[type="file"] {
 
 @media screen and (max-width: 1200px) {
   .outfit-preview { margin-top: 0; }
+  #banner { 
+    min-height: 70vh;
+    background-position: right 45% top 0px; }
 }
 
 @media screen and (max-width: 768px) {

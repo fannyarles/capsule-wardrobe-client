@@ -1,7 +1,7 @@
-import { Link, useLocation, useParams, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import OutfitCard from "../../components/OutfitCard";
 import Loader from "../../components/Loader";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import './outfits.css';
 
@@ -27,8 +27,6 @@ function RandomOutfits() {
         }
     }, [itemParams, storedToken]);
 
-    const saveOutfitIcons = document.querySelectorAll('.save-outfit-icon');
-
     return (<>
         <div className="row text-start">
             <div className="col col-12">
@@ -47,6 +45,7 @@ function RandomOutfits() {
                         {!items.outfits.length &&
                             <div className="row d-inline-flex">
                                 <p>No outfits fit your search.</p>
+                                {errorMessage && <p>{errorMessage}</p>}
                                 <Link to='/outfits/random' className="btn btn-primary">Back to search</Link>
                             </div>
                         }

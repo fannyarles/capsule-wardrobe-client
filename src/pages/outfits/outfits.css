@@ -48,3 +48,7 @@
 .edit-outfit-icon {
     line-height: 10px!important;
 }
+
+.outfit-card-item {
+    transition: all .5s;
+}

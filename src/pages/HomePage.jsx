@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import logo from './../assets/logo_C_white.png'
 
 function HomePage() {
@@ -6,10 +7,10 @@ function HomePage() {
         <div className="col-xxl-12">
             <div id="banner" className="row text-center">
                 <div className="row d-flex align-items-center py-5">
-                    <div className="col-lg-12">
+                    <div className="col col-12 mx-auto">
                         <h1 className="display-2 lh-5 mb-3">Efficiency and Sustainability.<br />All-in-One.</h1>
                         <div className="d-grid mt-5 gap-3 d-md-flex justify-content-md-center">
-                            <button type="button" className="btn btn-primary btn-lg px-4 me-md-2">Try MinFit</button>
+                            <Link to='/signup' className="btn btn-primary btn-lg px-4 me-md-2">Try MinFit</Link>
                             <button type="button" className="btn btn-primary btn-lg px-4" onClick={() => document.getElementById('features').scrollIntoView()}>Learn more</button>
                         </div>
                     </div>

@@ -50,6 +50,8 @@ function RandomOutfit() {
                             <p data-outfit-category="any" className={itemParams.category === "any" ? "category btn btn-info mx-1" : "category btn btn-outline-info mx-1"} onClick={selectType}>Any</p>
                             <p data-outfit-category="2" className={itemParams.category === "2" ? "category btn btn-info mx-1" : "category btn btn-outline-info mx-1"} onClick={selectType}>Top / Bottoms</p>
                             <p data-outfit-category="1" className={itemParams.category === "1" ? "category btn btn-info mx-1" : "category btn btn-outline-info mx-1"} onClick={selectType}>One-piece</p><br />
+
+                            {itemParams.category !== "any" && <><label htmlFor="category">Piece of clothing</label><br /></>}
                             {itemParams.category === "2" &&
                                 <>
                                     <p data-outfit-item="any" className={itemParams.pieceItem === "any" ? "pieceItem btn btn-info mx-1" : "pieceItem btn btn-outline-info mx-1"} onClick={selectPieceItem}>Any</p>

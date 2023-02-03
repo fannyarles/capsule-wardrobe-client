@@ -108,7 +108,7 @@ function EditItem() {
                             <img src={itemInfos.imageUrl} alt='item-pic' width="100%" /><br />
                         </div>
 
-                        <div className="col col-lg-4 col-md-6 col-sm-12 text-start d-flex flex-column justify-content-between">
+                        <div className="col col-lg-4 col-md-6 col-sm-12 text-start d-flex flex-column justify-content-start">
 
                             <div>
 
@@ -145,7 +145,7 @@ function EditItem() {
                                         : <>Edit Item</>}
                                 </button>
 
-                                <button className="btn btn-primary mx-1 btn-lg btn-danger" onClick={e => deleteItem(e)}>Delete item</button>
+                                <button className="btn mx-1 btn-lg btn-danger" onClick={e => deleteItem(e)}>Delete item</button>
 
                             </div>
                         </div>
