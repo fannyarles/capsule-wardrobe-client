@@ -22,7 +22,7 @@ function SwitchSection(props) {
     const switchItem = (itemType, currentItemId) => {
         const loadingToast = toast.loading('Waiting...');
 
-        axios.get(`http://localhost:5005/dressing/switch/${occasion}/${itemType}/${currentItemId}`, { headers: { "Authorization": `Bearer ${storedToken}` } })
+        axios.get(`${process.env.REACT_APP_API_URL}/dressing/switch/${occasion}/${itemType}/${currentItemId}`, { headers: { "Authorization": `Bearer ${storedToken}` } })
             .then(response => {
 
                 if (!response.data) {
