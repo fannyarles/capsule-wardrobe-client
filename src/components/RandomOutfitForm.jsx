@@ -42,7 +42,7 @@ function RandomOutfitForm(props) {
     const handleSubmit = e => {
         e.preventDefault();
 
-        axios.post(`http://localhost:5005/outfits/random/`, itemParams)
+        axios.post(`${process.env.REACT_APP_API_URL}/outfits/random/`, itemParams)
             .then(response => setOutfits(response.data))
             .catch(err => setErrorMessage(err.response.data.message))
     }
